@@ -1,0 +1,107 @@
+<ion-header>
+    <ion-toolbar no-border>
+      <ion-buttons slot="start">
+        <ion-back-button text="返回" color="primary" defaultHref="login"></ion-back-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+  <ion-slides #SignupSlides >
+    <ion-slide>
+      <form novalidate >
+        <ion-list><img src="assets/img/login.png" alt=""></ion-list>
+        <ion-list>
+          <ion-item>
+              <ion-label position="fixed">手机号</ion-label>
+              <ion-input [(ngModel)]="user.phone" name="phone" type="number" placeholder="请输入13位中国手机号" required
+                 pattern="^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,3,5-9]))\d{8}$">
+              </ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label position="fixed">验证码</ion-label>
+              <ion-input lines="none" placeholder="请输入验证码"> {{verifyCode.code}}
+              </ion-input>
+              <ion-button type="submit" expand="full" color="primary" (click) = "sendVerifyCode()">发送验证码</ion-button>
+          </ion-item>
+          <ion-item>
+              <ion-label position="fixed">输入密码</ion-label>
+              <ion-input  placeholder="密码为字母数字组合，不少于8位" name="password" type="password" required="true" [(ngModel)]="user.passport"> 
+              </ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label position="fixed">确认密码</ion-label>
+              <ion-input  placeholder="重新输入一次密码" name="password" type="password" required="true" [(ngModel)]="user.confirmPassword"> 
+              </ion-input>
+          </ion-item>
+      </ion-list>
+      <div padding-horizontal>
+          <ion-button type="submit" expand="full" color="primary" (click) = "onNext()">
+            下一步
+          </ion-button>
+        </div>
+      </form>
+    </ion-slide>
+
+    <ion-slide>
+      <form >
+        <ion-list>
+            <ion-item>
+                <ion-label position="fixed">姓名</ion-label>
+                <ion-input lines="none" placeholder="输入姓名" name="name" type="name" required="true" [(ngModel)]="user.name"> 
+                </ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="fixed">昵称</ion-label>
+                <ion-input lines="none" placeholder="输入昵称" name="nickname" type="nickname" required="true" [(ngModel)]="user.nickname"> 
+                </ion-input>
+            </ion-item>
+            <ion-item>
+                  <ion-label position="fixed">性别</ion-label>
+                  <ion-radio-group (ionChange)="checkSex($event)">
+                  <ion-item>
+                    <ion-label>男性</ion-label>
+                    <ion-radio slot="start" value="man"></ion-radio>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>女性</ion-label>
+                    <ion-radio slot="start" value="woman"></ion-radio>
+                  </ion-item>
+                  </ion-radio-group>
+              </ion-item>
+            <ion-item>
+                <ion-label position="fixed">学校</ion-label>
+                <ion-input lines="none" placeholder="输入学校" name="school" type="school" required="true" [(ngModel)]="user.school"> 
+                </ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="fixed">院系</ion-label>
+                <ion-input lines="none" placeholder="输入院系" name="department" type="department" required="true" [(ngModel)]="user.department"> 
+                </ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="fixed">身份</ion-label>
+                <ion-radio-group (ionChange)="checkRole($event)">
+                <ion-item>
+                  <ion-label>学生</ion-label>
+                  <ion-radio slot="start" value="student" ></ion-radio>
+                </ion-item>
+                <ion-item>
+                  <ion-label>教师</ion-label>
+                  <ion-radio slot="start" value="teacher" ></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-item>
+          <ion-item>
+              <ion-label position="fixed">学号/工号</ion-label>
+              <ion-input  placeholder="输入学号/工号" name="id" type="id" required="true" [(ngModel)]="user.id"> 
+              </ion-input>
+          </ion-item>
+        </ion-list>
+          <ion-button type="submit" expand="full" color="primary" routerLink="/login" >
+            完成注册
+          </ion-button>  
+      </form>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

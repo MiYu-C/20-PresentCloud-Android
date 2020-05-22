@@ -1,0 +1,35 @@
+<ion-content no-padding>
+  <img src="assets/img/login.png" alt="">
+  <div padding-horizontal>
+    <form #loginForm="ngForm">
+    <ion-list padding-right no-margin>
+      <ion-item lines="none"></ion-item>
+      <ion-item>
+        <ion-label position="fixed">手机号</ion-label>
+        <ion-input name="username" type="text" placeholder="请输入13位手机号" required
+        pattern="^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,3,5-9]))\d{8}$" [(ngModel)]="username"></ion-input>
+      </ion-item>
+      <ion-item margin-top>
+        <ion-label position="fixed">验证码</ion-label>
+        <ion-input name="password" type="password" placeholder="请输入验证码" [(ngModel)]="password">{{verifyCode.code}}</ion-input>
+        <ion-button type="submit" fill="clear" size="small" (click) = "sendVerifyCode()">发送验证码</ion-button>
+      </ion-item>
+    </ion-list>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button expand="full" color="primary" routerLink="/tabs">登录</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button expand="full" fill="outline" color="primary" href="/signup">注册新账号</ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button fill="clear" size="small" href="/login">密码登录</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    </form>
+  </div>
+</ion-content>

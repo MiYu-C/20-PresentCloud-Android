@@ -1,0 +1,65 @@
+<ion-header [translucent]="true">
+  <ion-toolbar collapse="true">
+    <ion-grid>
+      <ion-row>
+        <ion-col width="50%"> 
+          <ion-segment>
+           <ion-segment-button name="create" (click)= "clickcreate()">
+             <ion-label>我创建的</ion-label>
+          </ion-segment-button>
+          <ion-segment-button name="join" (click) = "clickjoin()">
+        <ion-label>我加入的</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-col>
+  <ion-col>
+    <div class="add">
+      <ion-button slot="icon-only" size="big" fill="clear" style="float:right">
+        <ion-icon name="add-outline"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-col> 
+      </ion-row>
+    </ion-grid>  
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-searchbar  placeholder="搜索" ></ion-searchbar>
+  
+  <div *ngIf="segment == 1">
+    <ion-list>
+      <ion-item [routerLink]="">
+        <ion-thumbnail slot="start">
+          <img src="assets/img/class.png">
+        </ion-thumbnail>
+        <ion-label>
+          <h3>工程实践</h3>
+          <p>蔡星星</p>
+          <p>2019级专硕</p>
+        </ion-label>
+        <div> 
+          <ion-button slot="icon-only" size="big" fill="clear" style="float:right">进入</ion-button>
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div *ngIf="segment == 2">
+    <ion-list>
+      <ion-item [routerLink]="">
+        <ion-thumbnail slot="start">
+          <img src="assets/img/class.png">
+        </ion-thumbnail>
+        <ion-label>
+          <h3>工程训练</h3>
+          <p>熊星星</p>
+          <p>2019级专硕</p>
+        </ion-label>
+        <div> 
+          <ion-button slot="icon-only" size="big" fill="clear" style="float:right">进入</ion-button>
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
