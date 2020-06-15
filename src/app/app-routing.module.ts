@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-
 const routes: Routes = [
   {
     path: '',
@@ -20,17 +19,33 @@ const routes: Routes = [
   },
   {
     path: 'info',
-    loadChildren: () => import('./routes/info/info.module').then( m => m.InfoPageModule)
+    loadChildren: () => import('./tab3/pages/info/info.module').then( m => m.InfoPageModule)
   },
   {
     path: 'setting',
-    loadChildren: () => import('./routes/setting/setting.module').then( m => m.SettingPageModule)
-  }
+    loadChildren: () => import('./tab3/pages/setting/setting.module').then( m => m.SettingPageModule)
+  },
+  {
+    path: 'forgot-password',
+    loadChildren: () => import('./routes/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
+  },
+  {
+    path: '',
+    loadChildren: () => import('./routes/class-tabs/class-tabs.module').then( m => m.ClassTabsPageModule)
+  },
+  {
+    path: 'initiate',
+    loadChildren: () => import('./routes/sign-in/initiate/initiate.module').then( m => m.InitiatePageModule)
+  },
+  {
+    path: '',
+    loadChildren: () => import('./routes/class-tabs1/class-tabs1.module').then( m => m.ClassTabs1PageModule)
+  },
 ];
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}

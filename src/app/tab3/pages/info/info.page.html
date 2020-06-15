@@ -1,9 +1,12 @@
 <ion-header>
   <ion-toolbar no-border>
     <ion-buttons slot="start">
-      <ion-back-button text="返回" color="primary"></ion-back-button>
+      <ion-button [routerLink]="['/tabs/tab3']">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+        返回
+      </ion-button>
     </ion-buttons>
-    <ion-title style='text-align:center'>个人信息</ion-title>
+    <ion-title style="padding-left: 23%;">个人信息</ion-title>
   </ion-toolbar>
 </ion-header>
 

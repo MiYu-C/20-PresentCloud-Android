@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/tabs/tab1']">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+        返回
+      </ion-button>
+    </ion-buttons>
+    <ion-title style="padding-left: 25%;">班课详情</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+      <ion-item>
+        <ion-label>班课号</ion-label>
+        <ion-note slot="end" >{{classInfo.classid}}</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label>班级名称</ion-label>
+        <ion-note slot="end" >{{classInfo.classname}}</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label>课程名称</ion-label>
+        <ion-note slot="end" >{{classInfo.couresename}}</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label>教师</ion-label>
+        <ion-note slot="end" >{{classInfo.teachername}}</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label>学习要求</ion-label>
+        <ion-note slot="end" >{{classInfo.requirement}}</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label>考试安排</ion-label>
+        <ion-note slot="end">{{classInfo.plan}}</ion-note>
+      </ion-item>
+    </ion-list>
+    <ion-button expand="full">退出班课</ion-button>
+</ion-content>

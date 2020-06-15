@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/class-tabs']">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+        返回
+      </ion-button>
+    </ion-buttons>
+    <ion-title style="padding-left: 23%;">发起签到</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-text style="padding-left: 5%;font-size: 15px;">选择签到方式</ion-text>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button fill="clear" style="padding-inline-start:10%" (click)='getLocation()'>
+          <ion-icon name="person-outline" size="large"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button [routerLink]="['/gesture']" fill="clear"  style="padding-inline-start:12%">
+          <ion-icon name="grid-outline" size="large"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-label style="padding-left: 5%;" (click)='getLocation()'>一键签到</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-label style="padding-left: 12%;" [routerLink]="['/gesture']" >手势签到</ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -14,7 +14,7 @@
   </ion-col>
   <ion-col>
     <div class="add">
-      <ion-button slot="icon-only" size="big" fill="clear" style="float:right">
+      <ion-button slot="icon-only" size="big" fill="clear" style="float:right" (click)="presentPop($event)">
         <ion-icon name="add-outline"></ion-icon>
       </ion-button>
     </div>
@@ -29,7 +29,7 @@
   
   <div *ngIf="segment == 1">
     <ion-list>
-      <ion-item [routerLink]="">
+      <ion-item href='/class-tabs/member'>
         <ion-thumbnail slot="start">
           <img src="assets/img/class.png">
         </ion-thumbnail>
@@ -47,7 +47,7 @@
 
   <div *ngIf="segment == 2">
     <ion-list>
-      <ion-item [routerLink]="">
+      <ion-item href='/class-tabs1/member1'>
         <ion-thumbnail slot="start">
           <img src="assets/img/class.png">
         </ion-thumbnail>

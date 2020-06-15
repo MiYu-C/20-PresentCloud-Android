@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons collapse="true" slot="start">
+      <ion-back-button text="班课"></ion-back-button>
+    </ion-buttons>
+    <ion-title>加入班课</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides #classSlides >
+    <ion-slide>
+      <form>
+        <ion-item>
+          <ion-input placeholder="请输入班课号" required></ion-input>
+        </ion-item>
+        <h3>或</h3>
+        <ion-button (click)="scan()">扫描二维码</ion-button>
+        <ion-button  expand="full" color="primary" (click)="onNext()" >
+          下一步
+        </ion-button>
+      </form>
+    </ion-slide>
+    <ion-slide>
+      <form novalidate>
+        <ion-list lines="full">
+          <ion-item>
+            <ion-label position="fixed">班课名称</ion-label>
+            <ion-text>1</ion-text>
+          </ion-item>
+          <ion-item>
+            <ion-label>老师</ion-label>
+            <ion-text>1</ion-text>
+          </ion-item>
+        </ion-list>
+        <ion-button type="submit" expand="full" color="primary" routerLink="/tabs"  >
+          加入
+        </ion-button>
+      </form>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
