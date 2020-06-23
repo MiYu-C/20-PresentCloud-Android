@@ -20,7 +20,7 @@ export class Member1Page implements OnInit{
   }
 
   gotosign() {
-    this.nav.navigateForward('\sign-in');
+    this.nav.navigateForward('/signin');
   }
 
   clickedStar() {

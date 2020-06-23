@@ -1,7 +1,6 @@
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
-
 declare var BMap;
 @Component({
   selector: 'app-initiate',
@@ -13,9 +12,6 @@ export class InitiatePage implements OnInit {
               public nav: NavController) { }
   ngOnInit() {
   }
-
-
-
 
   async getLocation() {
     let longitude: any ;
@@ -36,7 +32,6 @@ export class InitiatePage implements OnInit {
     this.localStorage.set('longitude', longitude);
     this.localStorage.set('latitude', latitude);
     console.log(latitude);
-    this.nav.navigateForward('\start');
+    this.nav.navigateForward('/start');
   }
-
 }

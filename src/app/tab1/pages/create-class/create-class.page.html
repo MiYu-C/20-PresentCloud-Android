@@ -1,11 +1,15 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons collapse="true" slot="start">
-      <ion-back-button text="取消"></ion-back-button>
+  <ion-toolbar no-border>
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/tabs/tab1']">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+        返回
+      </ion-button>
     </ion-buttons>
-    <ion-title >创建班课</ion-title>
+    <ion-title style="padding-left: 23%;">创建班课</ion-title>
   </ion-toolbar>
 </ion-header>
+
 
 <ion-content>
 

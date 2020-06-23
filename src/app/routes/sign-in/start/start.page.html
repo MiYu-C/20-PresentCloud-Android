@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/class-tabs']">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+        返回
+      </ion-button>
+    </ion-buttons>
+    <ion-title style="padding-left: 30%;">签到中</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h1 style="text-align: center;">签到人数 20/50</h1>
+</ion-content>
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button fill="outline" expand="block" [routerLink]="['/record']">结束</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

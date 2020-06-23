@@ -41,6 +41,18 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./routes/class-tabs1/class-tabs1.module').then( m => m.ClassTabs1PageModule)
   },
+  {
+    path: 'start',
+    loadChildren: () => import('./routes/sign-in/start/start.module').then( m => m.StartPageModule)
+  },
+  {
+    path: 'record',
+    loadChildren: () => import('./routes/sign-in/record/record.module').then( m => m.RecordPageModule)
+  },
+  {
+    path: 'signin',
+    loadChildren: () => import('./routes/sign-in/signin/signin.module').then( m => m.SigninPageModule)
+  },
 ];
 @NgModule({
   imports: [

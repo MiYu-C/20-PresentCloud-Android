@@ -20,10 +20,10 @@ export class MemberPage implements OnInit{
   }
 
   gotosign() {
-    this.nav.navigateForward('\sign-in');
+    this.nav.navigateForward('\initiate');
   }
 
   clickedStar() {
-    this.router.navigateByUrl('/unopen');
+    this.router.navigateByUrl('/record');
   }
 }

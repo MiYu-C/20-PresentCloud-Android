@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/class-tabs1']">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+        返回
+      </ion-button>
+    </ion-buttons>
+    <ion-title style="padding-left: 33%;">签到</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+  <ion-button expand="full" color="secondary" (click)="getLocation()" [routerLink]="['/class-tabs1']">
+    开始签到
+  </ion-button>
+  
+
+  <ion-text style="padding-left: 5%;font-size: 15px;">历史签到记录</ion-text>
+  <ion-text style="padding-left: 55%;font-size: 15px; color:rgb(0, 140, 255)">67%</ion-text>
+  <ion-list>
+    <ion-item>
+      <ion-label class="ion-text-wrap">
+        <ion-text><h3>2020-4-15 星期三 签到</h3></ion-text>
+        <ion-text>12:00</ion-text>
+      </ion-label>
+      <ion-text>已签到</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label class="ion-text-wrap">
+        <ion-text><h3>2020-4-15 星期三 签到</h3></ion-text>
+        <ion-text>12:00</ion-text>
+      </ion-label>
+      <ion-text>未签到</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label class="ion-text-wrap">
+        <ion-text><h3>2020-4-15 星期三 签到</h3></ion-text>
+        <ion-text>12:00</ion-text>
+      </ion-label>
+      <ion-text>已签到</ion-text>
+    </ion-item>
+  </ion-list>
+</ion-content>
