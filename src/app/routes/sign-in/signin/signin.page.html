@@ -11,35 +11,20 @@
 </ion-header>
 
 <ion-content>
-  
-  <ion-button expand="full" color="secondary" (click)="getLocation()" [routerLink]="['/class-tabs1']">
-    开始签到
-  </ion-button>
-  
-
-  <ion-text style="padding-left: 5%;font-size: 15px;">历史签到记录</ion-text>
-  <ion-text style="padding-left: 55%;font-size: 15px; color:rgb(0, 140, 255)">67%</ion-text>
+  <div style="text-align: center;">
+    <ion-button style="width: 80%;" (click)="signin()">开始签到</ion-button>
+  </div>
   <ion-list>
-    <ion-item>
-      <ion-label class="ion-text-wrap">
-        <ion-text><h3>2020-4-15 星期三 签到</h3></ion-text>
-        <ion-text>12:00</ion-text>
+    <ion-list-header>
+      <ion-label>历史签到记录</ion-label>
+      <!-- <ion-text></ion-text> -->
+    </ion-list-header>
+    <ion-item *ngFor="let item of historyList">
+      <ion-label>
+        <h2>{{item.day}} 签到</h2>
+        <p>{{item.time}}</p>
       </ion-label>
-      <ion-text>已签到</ion-text>
-    </ion-item>
-    <ion-item>
-      <ion-label class="ion-text-wrap">
-        <ion-text><h3>2020-4-15 星期三 签到</h3></ion-text>
-        <ion-text>12:00</ion-text>
-      </ion-label>
-      <ion-text>未签到</ion-text>
-    </ion-item>
-    <ion-item>
-      <ion-label class="ion-text-wrap">
-        <ion-text><h3>2020-4-15 星期三 签到</h3></ion-text>
-        <ion-text>12:00</ion-text>
-      </ion-label>
-      <ion-text>已签到</ion-text>
+      <ion-text slot="end">{{item.isSignined?'已签到':'未签到'}}</ion-text>
     </ion-item>
   </ion-list>
 </ion-content>

@@ -34,7 +34,7 @@ export class SignupPage implements OnInit {
     sex: '',
     id: '',
     school: '',
-    department: ''
+    college: ''
   };
   
   @ViewChild('SignupSlides', {static: true}) SignupSlides: IonSlides;

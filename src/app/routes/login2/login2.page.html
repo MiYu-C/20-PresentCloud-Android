@@ -9,12 +9,12 @@
           <ion-input  name="userName"  type="text" placeholder="请输入手机号" required [(ngModel)]="login.userName" #userName="ngModel" 
           required pattern="^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,3,5-9]))\d{8}$" ></ion-input>
         </ion-item>
-        <ion-item>
-            <ion-input name="code" slot="start"  placeholder="请输入验证码" required [(ngModel)]="login.code" #code="ngModel" 
-            class="margintop fillet-boder" style="width: 60%; height: 38px;float: left;">
+        <ion-item margin-top>
+            <ion-label position="fixed">验证码</ion-label>
+            <ion-input name="code"  placeholder="请输入验证码" required [(ngModel)]="login.code" #code="ngModel" >
             </ion-input>
            <ion-button color="primary" slot="end" class="margintop" [disabled]="!verifyCode.disable"
-            style="width: 35%;" (click)="getCode()">{{ verifyCode.verifyCodeTips }}
+            style="width: 25%;" (click)="getCode()">{{ verifyCode.verifyCodeTips }}
           </ion-button>
         </ion-item>
       </ion-list>

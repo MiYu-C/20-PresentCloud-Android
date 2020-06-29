@@ -1,8 +1,7 @@
-import { APP_KEY } from 'src/app/core/start-app.guard';
 import { LocalStorageService } from './../../../services/local-storage.service';
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
-import { RouterModule } from '@angular/router';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-popover',
@@ -14,25 +13,18 @@ export class PopoverComponent implements OnInit {
   // public state: any = 1;
   constructor(
     public popoverController: PopoverController,
-    public localStorage: LocalStorageService) { }
+    public localStorage: LocalStorageService,
+    private router: Router) { }
 
   ngOnInit() {
   }
 
-  // ngOnChanges() {
-  //   if (this.localStorage.getItem('hasRole') === false) {
-  //     this.state = false;
-  //   } else {
-  //     this.state = true;
-  //   }
-  // }
-
-  // setRole() {
-  //   this.localStorage.set('role', 'studert');
-  //   const role: any = this.localStorage.getItem('role');
-  //   console.log(role);
-  // }
-
+  onCreateclass(){
+    this.router.navigateByUrl('tabs/tab1/create-class')
+  }
+  onJoinclass(){
+    this.router.navigateByUrl('tabs/tab1/join-class')
+  }
   async dismissPop(e: any) {
     this.popoverController.dismiss();
   }

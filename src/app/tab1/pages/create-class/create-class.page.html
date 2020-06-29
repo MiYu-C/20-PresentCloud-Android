@@ -10,36 +10,54 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content>
-
-  <ion-item>
-    <ion-label>班级</ion-label>
-    <ion-input placeholder="未设置"></ion-input>
+  <ion-list class="ion-padding">
+    <ion-item
+      lines="none"
+      class="hori_border"
+    >
+      <ion-label>课程</ion-label>
+      <ion-input class="input_text" slot="end" placeholder="未设置" [(ngModel)]="classInfo.courseName"></ion-input>
+    </ion-item>
+    <ion-item
+      lines="none"
+      class="bottom_border"
+    >
+      <ion-label>班级</ion-label>
+      <ion-input class="input_text" slot="end" placeholder="未设置" [(ngModel)]="classInfo.className"></ion-input>
+    </ion-item>
+    <ion-item
+      lines="none"
+      class="bottom_border"
+    >
+      <ion-label>学期</ion-label>
+      <ion-input class="input_text" slot="end" placeholder="未设置" [(ngModel)]="classInfo.semester"></ion-input>
+    </ion-item>
+    <ion-item
+      lines="none"
+      class="bottom_border"
+    >
+    <ion-label>学校</ion-label>
+    <ion-input class="input_text" slot="end" placeholder="未设置" [(ngModel)]="classInfo.school"></ion-input>
   </ion-item>
+  <ion-item
+  lines="none"
+  class="bottom_border"
+>
+  <ion-label>院系</ion-label>
+  <ion-select required placeholder="请选择学院" name="college" [(ngModel)]="college" class="long-select">
+    <ion-select-option *ngFor="let item of colleges" value="{{item.id}}"> {{item.label}} </ion-select-option>
+  </ion-select>
+</ion-item>
 
-  <ion-item>
-    <ion-label>课程</ion-label>
-    <ion-input placeholder="未设置"></ion-input>
-  </ion-item>
+  </ion-list>
 
-  <ion-item>
-    <ion-label>学期</ion-label>
-    <ion-input placeholder="未设置"></ion-input>
-  </ion-item>
-
-  <ion-item > 
-    <ion-label>学校课表班课</ion-label>
-    <ion-toggle slot="end"></ion-toggle>
-  </ion-item>
-
-  <ion-item>
-    <ion-label>设置考试安排</ion-label>
-    <ion-input placeholder="未设置"></ion-input>
-  </ion-item>
-  <div class="btn">
-    <ion-button expand="block"  href="/tabs/tab1/create-code" >
-      创建
-    </ion-button>
-  </div>
+  <br />
+  <ion-button
+    expand="block"
+    style="width: 80%; margin: auto;"
+    (click)="create()"
+  >
+    创建
+  </ion-button>
 </ion-content>

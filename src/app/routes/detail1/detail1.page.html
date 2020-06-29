@@ -14,28 +14,24 @@
     <ion-list>
       <ion-item>
         <ion-label>班课号</ion-label>
-        <ion-note slot="end" >{{classInfo.classid}}</ion-note>
+        <ion-note slot="end" >{{classInfo.courseCode}}</ion-note>
       </ion-item>
       <ion-item>
         <ion-label>班级名称</ion-label>
-        <ion-note slot="end" >{{classInfo.classname}}</ion-note>
+        <ion-note slot="end" >{{classInfo.className}}</ion-note>
       </ion-item>
       <ion-item>
         <ion-label>课程名称</ion-label>
-        <ion-note slot="end" >{{classInfo.couresename}}</ion-note>
+        <ion-note slot="end" >{{classInfo.courseName}}</ion-note>
       </ion-item>
       <ion-item>
         <ion-label>教师</ion-label>
-        <ion-note slot="end" >{{classInfo.teachername}}</ion-note>
+        <ion-note slot="end" >{{classInfo.teacherName}}</ion-note>
       </ion-item>
       <ion-item>
-        <ion-label>学习要求</ion-label>
-        <ion-note slot="end" >{{classInfo.requirement}}</ion-note>
-      </ion-item>
-      <ion-item>
-        <ion-label>考试安排</ion-label>
-        <ion-note slot="end">{{classInfo.plan}}</ion-note>
+        <ion-label>学期</ion-label>
+        <ion-note slot="end" >{{classInfo.semester}}</ion-note>
       </ion-item>
     </ion-list>
-    <ion-button expand="full">退出班课</ion-button>
+    <ion-button expand="full"  color="danger" (click)="exitClass()">退出班课</ion-button>
 </ion-content>

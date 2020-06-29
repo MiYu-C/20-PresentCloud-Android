@@ -1,6 +1,17 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { StartAppGuard } from './core/start-app.guard';
 const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'welcome',
+    pathMatch: 'full'
+  },
+  {
+    path: 'welcome',
+    loadChildren: './routes/welcome/welcome.module#WelcomePageModule',
+    canActivate: [StartAppGuard]
+  },
   {
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
@@ -24,6 +35,10 @@ const routes: Routes = [
   {
     path: 'setting',
     loadChildren: () => import('./tab3/pages/setting/setting.module').then( m => m.SettingPageModule)
+  },
+  {
+    path: 'about-us',
+    loadChildren: () => import('./tab3/pages/about-us/about-us.module').then( m => m.AboutUsPageModule)
   },
   {
     path: 'forgot-password',

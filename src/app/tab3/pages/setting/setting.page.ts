@@ -15,6 +15,9 @@ private router: Router) { }
   ngOnInit() {
     
   }
+  onAboutus(){
+    this.router.navigateByUrl('/about-us');
+  }
   onLogout() {
     const config = this.localStorageService.get('App', '');
     config.hasRun = false;

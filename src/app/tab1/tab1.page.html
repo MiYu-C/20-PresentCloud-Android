@@ -29,14 +29,14 @@
   
   <div *ngIf="segment == 1">
     <ion-list>
-      <ion-item href='/class-tabs/member'>
+      <ion-item  detail *ngFor="let item of classList" (click)="detailInfo(item.courseCode)">
         <ion-thumbnail slot="start">
           <img src="assets/img/class.png">
         </ion-thumbnail>
         <ion-label>
-          <h3>工程实践</h3>
-          <p>蔡星星</p>
-          <p>2019级专硕</p>
+          <h3>{{item.courseName}}</h3>
+          <p>{{item.teacherName}}</p>
+          <p>{{item.semester}}</p>
         </ion-label>
         <div> 
           <ion-button slot="icon-only" size="big" fill="clear" style="float:right">进入</ion-button>
@@ -47,14 +47,14 @@
 
   <div *ngIf="segment == 2">
     <ion-list>
-      <ion-item href='/class-tabs1/member1'>
+      <ion-item  detail *ngFor="let item of classList" (click)="detailInfo1(item.courseCode)">
         <ion-thumbnail slot="start">
           <img src="assets/img/class.png">
         </ion-thumbnail>
         <ion-label>
-          <h3>工程训练</h3>
-          <p>熊星星</p>
-          <p>2019级专硕</p>
+          <h3>{{item.courseName}}</h3>
+          <p>{{item.teacherName}}</p>
+          <p>{{item.semester}}</p>
         </ion-label>
         <div> 
           <ion-button slot="icon-only" size="big" fill="clear" style="float:right">进入</ion-button>

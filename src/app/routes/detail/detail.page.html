@@ -9,38 +9,63 @@
     <ion-title style="padding-left: 25%;">班课详情</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-    <ion-list>
-      <ion-item>
-        <ion-label>班课号</ion-label>
-        <ion-note slot="end">{{classInfo.classid}}</ion-note>
-      </ion-item>
-      <ion-item>
-        <ion-label>允许加入</ion-label>
-        <ion-toggle checked></ion-toggle>
-      </ion-item>
-      <ion-item>
-        <ion-label>班级名称</ion-label>
-        <ion-input placeholder="未设置" [(ngModel)]="classInfo.classname"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>课程名称</ion-label>
-        <ion-input placeholder="未设置" [(ngModel)]="classInfo.couresename"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>学期</ion-label>
-        <ion-input placeholder="未设置" [(ngModel)]="classInfo.semester"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>学习要求</ion-label>
-        <ion-input placeholder="未设置" [(ngModel)]="classInfo.requirement"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>考试安排</ion-label>
-        <ion-input placeholder="未设置" [(ngModel)]="classInfo.plan"></ion-input>
-      </ion-item>
-    </ion-list>
-    <ion-button expand="full" (click)="saveClassInfo()">保存</ion-button>
+<ion-list class="ion-padding">
+  <ion-item
+    lines="none"
+    class="hori_border"
+  >
+    <ion-label>课程</ion-label>
+    <ion-input class="input_text" slot="end" placeholder="未设置" [(ngModel)]="classInfo.courseName"></ion-input>
+  </ion-item>
+  <ion-item
+    lines="none"
+    class="bottom_border"
+  >
+    <ion-label>班级</ion-label>
+    <ion-input class="input_text" slot="end" placeholder="未设置" [(ngModel)]="classInfo.className"></ion-input>
+  </ion-item>
+  <ion-item
+    lines="none"
+    class="bottom_border"
+  >
+    <ion-label>学期</ion-label>
+    <ion-input class="input_text" slot="end" placeholder="未设置" [(ngModel)]="classInfo.semester"></ion-input>
+  </ion-item>
+  <ion-item
+    lines="none"
+    class="bottom_border"
+  >
+    <ion-label>学校</ion-label>
+    <ion-input class="input_text" slot="end" placeholder="未设置" [(ngModel)]="classInfo.school"></ion-input>
+  </ion-item>
+  <ion-item
+    lines="none"
+    class="bottom_border"
+  >
+    <ion-label>院系</ion-label>
+    <ion-select required placeholder="请选择学院" name="college" [(ngModel)]="college" class="long-select">
+      <ion-select-option *ngFor="let item of colleges" value="{{item.id}}"> {{item.label}} </ion-select-option>
+    </ion-select>
+  </ion-item>
+</ion-list>
 
+<br />
+<ion-button
+  expand="block"
+  style="width: 80%; margin: auto;"
+  (click)="change()"
+>
+  保存
+</ion-button>
+
+<br />
+<ion-button
+  expand="block"
+  style="width: 80%; margin: auto;"
+  (click)="closeClass()"
+  color="danger"
+>
+  结束班课
+</ion-button>
 </ion-content>

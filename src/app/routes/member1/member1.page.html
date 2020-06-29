@@ -27,27 +27,20 @@
 </ion-header>
 
 <ion-content>
-  <ion-text style="padding-inline-start: 7%;">成员总数</ion-text>
-  <ion-text style="padding-inline-start: 57%;">10人</ion-text>
-  <ion-list>
-    <ion-item>
+  <ion-list style="width: 90%;margin: 0 auto;">
+    <ion-list-header>
+      <ion-label>成员总数</ion-label>
+      <ion-text>{{classInfo.studentCount}}人 </ion-text>
+    </ion-list-header>
+    <ion-item *ngFor="let item of memberList let i=index" (click)="memberDetail(item.number)">
+      <ion-text slot="start">{{i + 1}}</ion-text>
       <ion-thumbnail slot="start">
-        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+        <ion-img src="assets/img/member.png"></ion-img>
       </ion-thumbnail>
       <ion-label>
-        <h3>李雪</h3>
-        <p> 学号</p>
-        <p style="color:orangered">135经验值</p>
-      </ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-thumbnail slot="start">
-        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-      </ion-thumbnail>
-      <ion-label>
-        <h3>李雪</h3>
-        <p> 学号</p>
-        <p style="color:orangered">135经验值</p>
+        <h2>{{item.name}}</h2>
+        <h2><strong style="color:orange">{{item.experience}}</strong>&nbsp;&nbsp;<span style="font-size: smaller;">经验值</span></h2>
+        <p>{{item.studentNumber}}</p>
       </ion-label>
     </ion-item>
   </ion-list>

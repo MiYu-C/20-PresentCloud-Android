@@ -12,7 +12,7 @@
 
 <ion-content non-padding color="medium">
 <ion-list inset="true">
-  <ion-item [routerLink]="">
+  <ion-item (click)="onAboutus()">
     <ion-label>关于我们</ion-label>
   </ion-item>
   <ion-item>
@@ -21,7 +21,7 @@
     </ion-item>
     <ion-item>
       <ion-label>版本号</ion-label>
-      <ion-note slot="end">{{version}}</ion-note>
+      <ion-note slot="end">1.0.0</ion-note>
   </ion-item>
 </ion-list>
 
