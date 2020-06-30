@@ -23,20 +23,36 @@ export class SignupPage implements OnInit {
     submited: false,
     verifyCodeResult: false
   };
-  public user: any = {
-    phone: '',
-    code:'',
-    password: '',
+  public user = {
+    phone: '',//phone  phone
+    code:'',//
+    password: '',//password password
     confirmPassword: '',
-    role: '',
-    name: '',
-    nickname: '',
-    sex: '',
-    id: '',
+    name: '',//name username
+    nickname:'',//name nick_name
+    sex: '',//sex gender
+    number: '',//student_number 
     school: '',
-    college: ''
+    college: '',
+    status:''//student teacher
   };
-  
+  public studentForm={
+    phone:'',
+    password:'',
+    name:'',
+    sex:'',
+    studentNumber :'',
+    status:'',
+    email:'',
+    school:''
+  }
+  public teacherForm={
+    phone:'',
+    password:'',
+    username:'',
+    gender:'',
+    status:''
+  }
   @ViewChild('SignupSlides', {static: true}) SignupSlides: IonSlides;
   intervalFun: any;
   constructor(private alertController: AlertController,
@@ -51,7 +67,7 @@ export class SignupPage implements OnInit {
   ngOnInit() {
     this.SignupSlides.lockSwipeToNext(true)
     this.SignupSlides.lockSwipeToPrev(true)
-    const api='/mobile/college'
+    const api='/mobileApp/college'
     this.httpService.ajaxGet(api).then((res:any)=>{
       for(let i in res[0].children){
         const item = {
@@ -173,20 +189,36 @@ export class SignupPage implements OnInit {
     }
   }
   checkRole(e) {
-    this.user.role = e.detail.value;
-    if(this.user.role=='student'){
+    this.user.status = e.detail.value;
+    if(this.user.status=='student'){
       this.isStudent=true
-    }else{
+      this.studentForm={
+        phone: this.user.phone,
+        password: this.user.password,
+        name: this.user.name,
+        sex: this.user.sex,
+        studentNumber: this.user.number,
+        status: this.user.status,
+        email:'email',
+        school:this.user.school,
+      }
+    }else if(this.user.status=='teacher'){
       this.isStudent=false
+      this.teacherForm={
+        phone: this.user.phone,
+        password: this.user.password,
+        username: this.user.name,
+        gender: this.user.sex,
+        status: this.user.status
+      }
     }
   }
-  
   checkSex(e) {
     this.user.sex = e.detail.value;
   }
   async onRegisterInfo(form: NgForm){
-    if(form.valid){
-      this.passportService.register(this.isStudent, this.user).then(async (res:any)=>{
+    if(form.valid&&this.isStudent==true){
+      this.passportService.register(this.isStudent, this.studentForm).then(async (res:any)=>{
         const alert = await this.alertCtrl.create({
           header: '提示',
           message: '注册成功',
@@ -198,7 +230,21 @@ export class SignupPage implements OnInit {
       }).catch(err =>{
         console.log(err)
       })
-    }else{
+    }else if(form.valid&&this.isStudent==false){
+      this.passportService.register(this.isStudent, this.teacherForm).then(async (res:any)=>{
+        const alert = await this.alertCtrl.create({
+          header: '提示',
+          message: '注册成功',
+          buttons: ['确定']
+        })
+        alert.present()
+        window.location.replace('login')
+        // this.router.navigateByUrl('passport/login')
+      }).catch(err =>{
+        console.log(err)
+      })
+    }
+    else{
       const toast = await this.toastCtrl.create({
         message: '请输入完整信息',
         duration: 3000

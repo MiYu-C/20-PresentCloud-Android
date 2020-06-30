@@ -12,22 +12,22 @@ export class HttpService {
 
   constructor(private httpClient: HttpClient, private loading: LoadingController,public alertController: AlertController, private localStorageService:LocalStorageService) { }
 
-  domain = '' // easy-mock http://47.115.72.49:7300/mock/5e7ababe6914d01473f8142c/yunzaodao
+  domain = 'http://47.115.22.87:8010' // easy-mock http://47.115.72.49:7300/mock/5e7ababe6914d01473f8142c/yunzaodao
 
   headerOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
-      'Authorization': 'my-auth-token'
+      // 'Authorization': 'my-auth-token'
     }),
   }
 
   public request(method:string,url:string,data: Object):Observable<HttpResponse<any>> {
     this.loadShow()
-    let token = this.localStorageService.get(USER_KEY, '').token
-    if(!token) token = 'my-auth-token'
+    // let token = this.localStorageService.get(USER_KEY, '').token
+    // if(!token) token = 'my-auth-token'
     this.headerOptions.headers = new HttpHeaders({
       'Content-Type':  'application/json',
-      'Authorization': token
+      // 'Authorization': token
     })
     switch(method){
       case 'get':
@@ -75,7 +75,7 @@ export class HttpService {
                 const userInfo = this.localStorageService.get(USER_KEY, '')
                 userInfo.isLogined = false
                 this.localStorageService.set(USER_KEY, userInfo)
-                window.location.replace('passport/login')
+                window.location.replace('/login')
               }
             }
           ]

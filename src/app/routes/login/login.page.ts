@@ -24,7 +24,6 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
   }
- 
   async onLogin() {
     // 验证输入是否合法
     if (this.login.userName === '') {
@@ -41,15 +40,16 @@ export class LoginPage implements OnInit {
       toast.present()
     } else {
       const json = { 'username':this.login.userName, 'password':this.login.password }
+      console.log(json)
       this.passportService.login(json).then(async (res:any)=>{
         let userInfo: any = this.localStorageService.get(USER_KEY, {})
         userInfo['phone'] = this.login.userName
-        const api='/mobile/userInfo?phone=' + this.login.userName
+        const api='/mobileApp/userInfo?phone=' + this.login.userName
         this.httpService.ajaxGet(api).then((res:any)=>{
           userInfo = res
           userInfo['isLogined'] = true
           this.localStorageService.set(USER_KEY, userInfo)
-          window.location.replace('tabs')
+          window.location.replace('tabs/tab1')
           console.log("登录成功")
         }).catch((err)=>{
           console.log(err)

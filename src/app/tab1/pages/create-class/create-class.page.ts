@@ -20,13 +20,13 @@ export class CreateClassPage implements OnInit {
     'className': '',
     'semester': '',
     'school': '',
-    'college': {}
+    'college': ''
   }
 
   constructor(private router: Router, private httpService:CommonService, private toastCtrl: ToastController, private alertCtrl: AlertController, private localStorageService: LocalStorageService) { }
 
   ngOnInit() {
-    const api='/mobile/college'
+    const api='/mobileApp/college'
     this.httpService.ajaxGet(api).then((res:any)=>{
       for(let i in res[0].children){
         const item = {
@@ -74,11 +74,10 @@ export class CreateClassPage implements OnInit {
       toast.present()
       return
     }
-    const api = '/mobile/course'
+    const api = '/mobileApp/course'
     const userInfo = this.localStorageService.get(USER_KEY,'')
     this.classInfo['teacherName'] = userInfo.name
     this.classInfo['createUser'] = { id : userInfo.id }
-    this.classInfo.college = { id : Number(this.college) }
     this.httpService.ajaxPost(api, this.classInfo).then(async (res:any)=>{
       const alert = await this.alertCtrl.create({
         header: '提示',

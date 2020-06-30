@@ -10,7 +10,7 @@ export class PassportService {
   constructor(private httpService:CommonService, private localStorageService: LocalStorageService) { }
 
   async login(json:object){
-    const api='/mobile/login'
+    const api='/mobileApp/login'
     return new Promise((resolve,reject)=>{
       this.httpService.ajaxPost(api,json).then((res:any)=>{
         resolve(res)
@@ -20,7 +20,7 @@ export class PassportService {
     })
   }
   async checkIsRegisted(phone:string){
-    const api='/mobile/check?phone='+phone
+    const api='/mobileApp/check?phone='+phone
     return new Promise((resolve,reject)=>{
       this.httpService.ajaxGet(api).then((res)=>{
         resolve(res)
@@ -32,9 +32,9 @@ export class PassportService {
   async register(isStudent:boolean,json:object){
     let api = ''
     if(isStudent){
-      api='/mobile/student/register'
+      api='/mobileApp/student/register'
     }else {
-      api='/mobile/teacher/register'
+      api='/mobileApp/teacher/register'
     }
     return new Promise((resolve,reject)=>{
       this.httpService.ajaxPost(api,json).then((res:any)=>{
@@ -46,7 +46,7 @@ export class PassportService {
   }
   async changePassword(oldPassword: string, newPassword: string, status: string){
     let userInfo: any = this.localStorageService.get(USER_KEY, false)
-    const  api='/mobile/password/change'
+    const  api='/mobileApp/password/change'
     const json = {
       count: userInfo.phone,
       oldPassword: oldPassword,

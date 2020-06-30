@@ -60,7 +60,7 @@ export class Login2Page implements OnInit {
         this.passportService.login(json).then(async (res:any)=>{
           let userInfo: any = this.localStorageService.get(USER_KEY, {})
           userInfo['phone'] = this.login.userName
-          const api='/mobile/userInfo?phone=' + this.login.userName
+          const api='/mobileApp/userInfo?phone=' + this.login.userName
           this.httpService.ajaxGet(api).then((res:any)=>{
             userInfo = res
             userInfo['isLogined'] = true

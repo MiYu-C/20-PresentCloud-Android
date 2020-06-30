@@ -37,7 +37,7 @@ export class Tab1Page {
   }
 
   async initClassList(isCreater){
-    let api='/mobile/course/'
+    let api='/mobileApp/course/'
     const id = this.localStorageService.get(USER_KEY, '').id
     if(isCreater){
       api += 'belong'

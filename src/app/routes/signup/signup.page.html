@@ -86,20 +86,7 @@
                 </ion-input>
             </ion-item>
 
-              <ion-item mode='android'>
-                <ion-label>性别&nbsp;<ion-text color="danger">*</ion-text></ion-label>
-                <ion-select (ionChange)="checkSex($event)" name="sex" [(ngModel)]="user.sex" value='man' interface="action-sheet">
-                  <ion-select-option value='man'>男</ion-select-option>
-                  <ion-select-option value='woman'>女</ion-select-option>
-                </ion-select>
-              </ion-item>
-            <ion-item mode='android'>
-              <ion-label>身份&nbsp;<ion-text color="danger">*</ion-text></ion-label>
-              <ion-select (ionChange)="checkRole($event)" name="role" [(ngModel)]="user.role" value='student' interface="action-sheet">
-                <ion-select-option value='teacher'>教师</ion-select-option>
-                <ion-select-option value='student'>学生</ion-select-option>
-              </ion-select>
-            </ion-item>
+
             <ion-item>
               <ion-label position="fixed">学校</ion-label>
               <ion-input lines="none" placeholder="输入学校" name="school" type="school" required="true" [(ngModel)]="user.school"> 
@@ -112,9 +99,23 @@
           </ion-item>
           <ion-item>
               <ion-label position="fixed">学号/工号</ion-label>
-              <ion-input  placeholder="输入学号/工号" name="id" type="id" required="true" [(ngModel)]="user.id"> 
+              <ion-input  placeholder="输入学号/工号" name="number" type="number" required="true" [(ngModel)]="user.number"> 
               </ion-input>
           </ion-item>
+          <ion-item mode='android'>
+            <ion-label>性别&nbsp;<ion-text color="danger">*</ion-text></ion-label>
+            <ion-select (ionChange)="checkSex($event)" name="sex" [(ngModel)]="user.sex" interface="action-sheet">
+              <ion-select-option value='男'>男</ion-select-option>
+              <ion-select-option value='女'>女</ion-select-option>
+            </ion-select>
+          </ion-item>
+        <ion-item mode='android'>
+          <ion-label>身份&nbsp;<ion-text color="danger">*</ion-text></ion-label>
+          <ion-select (ionChange)="checkRole($event)" name="status" [(ngModel)]="user.status" interface="action-sheet">
+            <ion-select-option value='teacher'>教师</ion-select-option>
+            <ion-select-option value='student'>学生</ion-select-option>
+          </ion-select>
+        </ion-item>
         </ion-list>
           <ion-button type="submit" expand="full" color="primary" >
             完成注册
