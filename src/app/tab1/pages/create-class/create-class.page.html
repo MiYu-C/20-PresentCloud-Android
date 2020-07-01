@@ -42,12 +42,14 @@
   </ion-item>
 
 
-<ion-item
-lines="none"
-class="bottom_border"
+  <ion-item
+  lines="none"
+  class="bottom_border"
 >
-<ion-label>院系</ion-label>
-<ion-input class="input_text" slot="end" placeholder="未设置" [(ngModel)]="classInfo.college"></ion-input>
+  <ion-label>院系</ion-label>
+  <ion-select required placeholder="请选择学院" name="college" [(ngModel)]="college" class="long-select input_text">
+    <ion-select-option *ngFor="let item of colleges" value="{{item.id}}"> {{item.label}} </ion-select-option>
+  </ion-select>
 </ion-item>
 
   </ion-list>

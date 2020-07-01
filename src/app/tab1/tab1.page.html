@@ -62,4 +62,21 @@
       </ion-item>
     </ion-list>
   </div>
+
+  <div *ngIf="segment == 3">
+      <ion-item >
+          <ion-label style="padding-left: 33%;">
+              还没有创建的班课
+          </ion-label>
+        </ion-item>
+    </div>
+
+    <div *ngIf="segment == 4">
+        <ion-item >
+            <ion-label style="padding-left: 33%;">
+              还没有加入的班课
+            </ion-label>
+          </ion-item>
+      </div>
+    
 </ion-content>

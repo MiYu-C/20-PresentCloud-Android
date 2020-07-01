@@ -54,7 +54,7 @@
             <ion-list>
               <ion-item>
                   <ion-label position="fixed">输入密码</ion-label>
-                  <ion-input name="password" placeholder="输入6-16位密码,至少包含数字、英文" type="password" required pattern="^(?!^[0-9]+$)(?!^[A-z]+$)(?!^[^A-z0-9]+$)^.{6,16}$"
+                  <ion-input name="password" placeholder="输入6-16位密码" type="password"   pattern="^[0-9A-Za-z]{6,16}$"
                   minlength="6" maxlength="16" [(ngModel)]="user.password" #password="ngModel" class="margintop"> 
                   </ion-input>
               </ion-item>
@@ -73,7 +73,7 @@
         </ion-slide>
 
     <ion-slide>
-      <form (ngSubmit)="onRegisterInfo(studentInfoForm)" #studentInfoForm="ngForm" *ngIf="isStudent" class="center-e" validating>
+      <form (ngSubmit)="onRegisterInfo(studentInfoForm)" #studentInfoForm="ngForm"  class="center-e" validating>
         <ion-list>
             <ion-item>
                 <ion-label position="fixed">姓名</ion-label>
@@ -81,22 +81,28 @@
                 </ion-input>
             </ion-item>
             <ion-item>
-                <ion-label position="fixed">昵称</ion-label>
-                <ion-input lines="none" placeholder="输入昵称" name="nickname" type="nickname" required="true" [(ngModel)]="user.nickname"> 
+                <ion-label position="fixed">用户名</ion-label>
+                <ion-input lines="none" placeholder="输入用户名" name="nickname" type="nickname" required="true" [(ngModel)]="user.nickname"> 
                 </ion-input>
             </ion-item>
-
-
             <ion-item>
+                <ion-label position="fixed">邮箱</ion-label>
+                <ion-input lines="none" placeholder="输入邮箱" name="email" type="email" required="true" [(ngModel)]="user.email"> 
+                </ion-input>
+            </ion-item>
+          <ion-item>
               <ion-label position="fixed">学校</ion-label>
-              <ion-input lines="none" placeholder="输入学校" name="school" type="school" required="true" [(ngModel)]="user.school"> 
-              </ion-input>
+            <ion-select required placeholder="请选择" name="school" [(ngModel)]="school" class="long-select margintop">
+              <ion-select-option *ngFor="let item of schools" value="{{item.id}}"> {{item.name}}</ion-select-option>
+            </ion-select>
           </ion-item>
           <ion-item>
-              <ion-label position="fixed">院系</ion-label>
-              <ion-input lines="none" placeholder="输入院系" name="college" type="college" required="true" [(ngModel)]="user.college"> 
-              </ion-input>
+              <ion-label position="fixed">学院</ion-label>
+            <ion-select required placeholder="请选择" name="college" [(ngModel)]="college" class="long-select margintop">
+              <ion-select-option *ngFor="let item of colleges" value="{{item.id}}"> {{item.label}} </ion-select-option>
+            </ion-select>
           </ion-item>
+
           <ion-item>
               <ion-label position="fixed">学号/工号</ion-label>
               <ion-input  placeholder="输入学号/工号" name="number" type="number" required="true" [(ngModel)]="user.number"> 

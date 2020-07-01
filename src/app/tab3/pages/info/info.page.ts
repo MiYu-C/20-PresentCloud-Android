@@ -26,9 +26,7 @@ export class InfoPage implements OnInit {
     'status': '',
     'school': '',
     'college': { "id": 8 },
-    'number': '',
-    'nickname': '',
-
+    'number': ''
   }
 
   constructor(private httpService:CommonService, private toastCtrl: ToastController, private localStorageService:LocalStorageService) { }
@@ -60,6 +58,7 @@ export class InfoPage implements OnInit {
   }
 
   async save() {
+    this.userInfo.college = {id: Number(this.college)}
     this.userInfo['studentNumber'] = this.userInfo.number
     if(this.userInfo.name && this.userInfo.number){
       const api='/mobileApp/student/update'

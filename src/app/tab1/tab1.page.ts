@@ -4,6 +4,7 @@ import { PopoverComponent } from 'src/app/tab1/components/popover/popover.compon
 import { LocalStorageService, USER_KEY, GLOBAL_VARIABLE_KEY } from 'src/app/services/local-storage.service';
 import { CommonService } from 'src/app/services/common.service';
 import { Router } from '@angular/router';
+import { threadId } from 'worker_threads';
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -13,8 +14,16 @@ export class Tab1Page {
   private segment: any = 1;
   popover: any;
 
-  phone = ''
-
+  userInfo = {
+    'id': '',
+    'name': '',
+    'phone': '',
+    'sex': '',
+    'status': '',
+    'school': '',
+    'college': { "id": 8 },
+    'number': ''
+  }
   slideFlag = false  // false = created, true = joined
 
   classList = []
@@ -23,9 +32,21 @@ export class Tab1Page {
 
   ngOnInit() {
     const userInfo = this.localStorageService.get(USER_KEY, '')
-    this.phone = userInfo.phone
-    this.initClassList(true)
-  }
+    this.userInfo.phone = userInfo.phone
+      let api='/mobileApp/userInfo?phone=' + this.userInfo.phone
+      this.httpService.ajaxGet(api).then(async (res:any)=>{
+        this.userInfo=res
+        api='/mobileApp/college'
+        this.httpService.ajaxGet(api).then((res:any)=>{
+        }).catch((err)=>{
+          console.log(err)
+        })
+      }).catch((err)=>{
+        console.log(err)
+      })
+
+    }
+  
   
   async presentPop(e: any) {
     this.popover = await this.popoverController.create({
@@ -51,13 +72,23 @@ export class Tab1Page {
   }
 
   async clickcreate(){
+    if(this.userInfo.status=="教师"){
       this.segment = 1;
       this.initClassList(true)
+    }
+    else{
+      this.segment = 3;
+    }
   }
 
   async clickjoin(){
-    this.segment = 2;
+    if(this.userInfo.status=="学生"){
+      this.segment = 2;
       this.initClassList(false)
+    }else{
+      this.segment = 4;
+    }
+
   }
 
   async detailInfo(index){

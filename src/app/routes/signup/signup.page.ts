@@ -12,7 +12,10 @@ import { PassportService } from 'src/app/services/passport.service';
   styleUrls: ['./signup.page.scss'],
 })
 export class SignupPage implements OnInit {
+  college = ''
+  school=''
   colleges = []
+  schools=[]
   isStudent = true
   public slideIndex: any = 0;
   public verifyCode = {
@@ -28,13 +31,15 @@ export class SignupPage implements OnInit {
     code:'',//
     password: '',//password password
     confirmPassword: '',
-    name: '',//name username
-    nickname:'',//name nick_name
+    name: '',//name nick_name
+    nickname:'',//name username
     sex: '',//sex gender
     number: '',//student_number 
-    school: '',
-    college: '',
-    status:''//student teacher
+    school: { "id": 8 },
+    status:'',//student teacher
+    college: { "id": 8 },
+    dept: { "id": 8 },
+    email:''
   };
   public studentForm={
     phone:'',
@@ -44,14 +49,24 @@ export class SignupPage implements OnInit {
     studentNumber :'',
     status:'',
     email:'',
-    school:''
+    school:{ "id": 8 },
+    college: { "id": 8 },
+    dept: { "id": 8 },
+    type:3
   }
   public teacherForm={
     phone:'',
     password:'',
+    nickName:'',
     username:'',
     gender:'',
-    status:''
+    status:'',
+    school:{ "id": 8 },
+    college: { "id": 8 },
+    dept: { "id": 8 },
+    email:'',
+    enabled:true,
+    type:2
   }
   @ViewChild('SignupSlides', {static: true}) SignupSlides: IonSlides;
   intervalFun: any;
@@ -69,7 +84,14 @@ export class SignupPage implements OnInit {
     this.SignupSlides.lockSwipeToPrev(true)
     const api='/mobileApp/college'
     this.httpService.ajaxGet(api).then((res:any)=>{
-      for(let i in res[0].children){
+
+      for(let i in res){
+        const item = {
+          'id': res[i].id,
+          'name': res[i].name }
+        this.schools.push(item)
+      }
+      for(let i in res[0].children){      
         const item = {
           'id': res[0].children[i].id,
           'label': res[0].children[i].label
@@ -199,25 +221,39 @@ export class SignupPage implements OnInit {
         sex: this.user.sex,
         studentNumber: this.user.number,
         status: this.user.status,
-        email:'email',
+        email:this.user.email,
         school:this.user.school,
+        college:this.user.college,
+        dept:this.user.dept,
+        type:3
       }
     }else if(this.user.status=='teacher'){
       this.isStudent=false
       this.teacherForm={
         phone: this.user.phone,
         password: this.user.password,
-        username: this.user.name,
+        nickName: this.user.name,
+        username:this.user.nickname,
         gender: this.user.sex,
-        status: this.user.status
+        status: this.user.status,
+        school:this.user.school,
+        college:this.user.college,
+        dept:this.user.dept,
+        email:this.user.email,
+        enabled:true,
+        type:2
       }
     }
   }
   checkSex(e) {
     this.user.sex = e.detail.value;
   }
+
   async onRegisterInfo(form: NgForm){
     if(form.valid&&this.isStudent==true){
+      this.user.college.id = Number(this.college)
+      this.user.school.id = Number(this.school)
+      this.user.dept.id = Number(this.college)
       this.passportService.register(this.isStudent, this.studentForm).then(async (res:any)=>{
         const alert = await this.alertCtrl.create({
           header: '提示',
@@ -231,6 +267,9 @@ export class SignupPage implements OnInit {
         console.log(err)
       })
     }else if(form.valid&&this.isStudent==false){
+      this.user.college.id = Number(this.college)
+      this.user.school.id = Number(this.school)
+      this.user.dept.id = Number(this.college)
       this.passportService.register(this.isStudent, this.teacherForm).then(async (res:any)=>{
         const alert = await this.alertCtrl.create({
           header: '提示',

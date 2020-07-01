@@ -15,12 +15,14 @@ export class CreateClassPage implements OnInit {
   college = ''
   colleges = []
 
+  semesters = []
+
   classInfo = {
     'courseName': '',
     'className': '',
     'semester': '',
     'school': '',
-    'college': ''
+    'college': {}
   }
 
   constructor(private router: Router, private httpService:CommonService, private toastCtrl: ToastController, private alertCtrl: AlertController, private localStorageService: LocalStorageService) { }
@@ -78,6 +80,7 @@ export class CreateClassPage implements OnInit {
     const userInfo = this.localStorageService.get(USER_KEY,'')
     this.classInfo['teacherName'] = userInfo.name
     this.classInfo['createUser'] = { id : userInfo.id }
+    this.classInfo.college = { id : Number(this.college) }
     this.httpService.ajaxPost(api, this.classInfo).then(async (res:any)=>{
       const alert = await this.alertCtrl.create({
         header: '提示',
@@ -86,7 +89,7 @@ export class CreateClassPage implements OnInit {
         buttons: [{
           text: '确定',
           handler: () => {
-            this.router.navigateByUrl('tabs/tab1/create-code')
+            window.location.replace('tabs/tab1')
           }
         }]
       })
@@ -96,4 +99,15 @@ export class CreateClassPage implements OnInit {
     })
   }
 
+  createSemesters(){
+    var semesters = []
+    const now = new Date()
+    const year = now.getFullYear()
+    const month = now.getMonth() + 1
+    for(let index=year+1; index>2010; index--){
+      semesters.push((index-1)+'-'+index+'-'+'2')
+      semesters.push((index-1)+'-'+index+'-'+'1')
+    }
+    return semesters
+  }
 }
