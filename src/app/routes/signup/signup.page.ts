@@ -14,6 +14,7 @@ import { PassportService } from 'src/app/services/passport.service';
 export class SignupPage implements OnInit {
   college = ''
   school=''
+  number=''
   colleges = []
   schools=[]
   isStudent = true
@@ -90,13 +91,6 @@ export class SignupPage implements OnInit {
           'id': res[i].id,
           'name': res[i].name }
         this.schools.push(item)
-      }
-      for(let i in res[0].children){      
-        const item = {
-          'id': res[0].children[i].id,
-          'label': res[0].children[i].label
-        }
-        this.colleges.push(item)
       }
     }).catch((err)=>{
       console.log(err)
@@ -248,7 +242,26 @@ export class SignupPage implements OnInit {
   checkSex(e) {
     this.user.sex = e.detail.value;
   }
-
+  checkSchool(){
+    this.colleges=[]
+    const api='/mobileApp/college'
+    this.httpService.ajaxGet(api).then((res:any)=>{
+      for(let i in res){
+        if(this.school==res[i].id){
+          this.number=i
+        }
+      }
+      for(let i in res[this.number].children){      
+        const item = {
+          'id': res[this.number].children[i].id,
+          'label': res[this.number].children[i].label
+        }
+        this.colleges.push(item)
+      }
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }
   async onRegisterInfo(form: NgForm){
     if(form.valid&&this.isStudent==true){
       this.user.college.id = Number(this.college)
