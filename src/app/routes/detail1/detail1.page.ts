@@ -12,6 +12,7 @@ export class Detail1Page implements OnInit {
 
   college = ''
   school=''
+  collegeName=''
   number=''
   colleges = []
   schools=[]
@@ -32,16 +33,7 @@ export class Detail1Page implements OnInit {
     'joinPermission': null,
     'enabled': null,
   }
-  userInfo = {
-    'id': '',
-    'name': '',
-    'phone': '',
-    'sex': '',
-    'status': '',
-    'school': '',
-    'college': { "id": 8 },
-    'number': ''
-  }
+
   constructor(private localStorageService:LocalStorageService, private router: Router, private httpService:CommonService, private alertCtrl: AlertController) { }
 
   ngOnInit() {
@@ -61,28 +53,27 @@ export class Detail1Page implements OnInit {
         this.classInfo[item] = res[item]
       }
       this.college = res['college'].id.toString()
-    })
-
-    const userInfo = this.localStorageService.get(USER_KEY, '')
-    this.userInfo.phone = userInfo.phone
-    api='/mobileApp/userInfo?phone=' + this.userInfo.phone
-    this.httpService.ajaxGet(api).then(async (res:any)=>{
-      this.userInfo=res
-      api='/mobileApp/college'
-      this.httpService.ajaxGet(api).then((res:any)=>{
-
-        for(let i in res){
-          const item = {
-            'id': res[i].id,
-            'name': res[i].name }
-          this.schools.push(item)
-        }
-      }).catch((err)=>{
-        console.log(err)
+      api= '/mobileApp/course/getTopDeptName?'+'college_id='+this.college
+      this.httpService.ajaxGet(api).then(async (res:any) =>{
+        this.school=res['name']
+        api='/mobileApp/college'
+        this.httpService.ajaxGet(api).then((res:any)=>{
+          for(let i in res){
+            if(this.school==res[i].name){
+              this.number=i
+            }
+          }
+          for(let i in res[this.number].children){     
+            if(this.college==res[this.number].children[i].id){
+              this.collegeName=res[this.number].children[i].label
+            } 
+  
+          }
+        })
       })
-    }).catch((err)=>{
-      console.log(err)
     })
+
+    
   }
 
 

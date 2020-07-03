@@ -74,7 +74,7 @@ export class JoinClassPage implements OnInit {
         buttons: [{
           text: '确定',
           handler: () => {
-            window.location.replace('home/class')
+            window.location.replace('tabs/tab1')
           }
         }]
       })

@@ -33,7 +33,20 @@ export class Login2Page implements OnInit {
     private authenticationCode: AuthenticationCodeService,
     private alertCtrl: AlertController,) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    const alert = await this.alertCtrl.create({
+      header: '提示',
+      message: '开发中',
+      buttons: [
+        {
+          text: '确定',
+          handler: () => {
+            this.router.navigateByUrl('/login')
+          }
+        }
+      ]
+    })
+    alert.present()
   }
  
   async onLogin(form: NgForm) {

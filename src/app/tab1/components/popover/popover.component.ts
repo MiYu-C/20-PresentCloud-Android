@@ -4,7 +4,6 @@ import { Component, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 import { LocalStorageService, USER_KEY, GLOBAL_VARIABLE_KEY } from 'src/app/services/local-storage.service';
 import { CommonService } from 'src/app/services/common.service';
-import { threadId } from 'worker_threads';
 import { IonSlides, ToastController, AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-popover',

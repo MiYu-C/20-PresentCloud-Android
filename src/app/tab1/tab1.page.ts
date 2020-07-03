@@ -4,7 +4,6 @@ import { PopoverComponent } from 'src/app/tab1/components/popover/popover.compon
 import { LocalStorageService, USER_KEY, GLOBAL_VARIABLE_KEY } from 'src/app/services/local-storage.service';
 import { CommonService } from 'src/app/services/common.service';
 import { Router } from '@angular/router';
-import { threadId } from 'worker_threads';
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -36,6 +35,13 @@ export class Tab1Page {
       let api='/mobileApp/userInfo?phone=' + this.userInfo.phone
       this.httpService.ajaxGet(api).then(async (res:any)=>{
         this.userInfo=res
+        if(this.userInfo.status=="教师"){
+          this.segment = 1;
+          this.initClassList(true)
+        }
+        else{
+          this.segment = 3;
+        }
         api='/mobileApp/college'
         this.httpService.ajaxGet(api).then((res:any)=>{
         }).catch((err)=>{

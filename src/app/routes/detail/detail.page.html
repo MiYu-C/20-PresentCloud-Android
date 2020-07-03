@@ -22,7 +22,13 @@
           <p>{{classInfo.semester}}</p>
         </ion-label>
       </ion-item>
-
+      <ion-button
+      expand="block"
+      style="width: 80%; margin: auto;"
+      (click)="gotoQrcode()"
+    >
+      查看课程二维码
+    </ion-button>
       <ion-item     lines="none"
       class="hori_border">
         <ion-label>班课号</ion-label>
@@ -54,16 +60,13 @@
 
   <ion-item>
       <ion-label>学校</ion-label>
-    <ion-select (ionChange)="checkSchool($event)" required placeholder={{userInfo.school}} name="school" [(ngModel)]="school" class="long-select margintop">
-      <ion-select-option *ngFor="let item of schools" value="{{item.id}}"> {{item.name}}</ion-select-option>
-    </ion-select>
+      <ion-text>{{school}}</ion-text>
   </ion-item>
+  
   <ion-item>
-    <ion-label>学院</ion-label>
-    <ion-select required placeholder={{userInfo.college}} name="college" [(ngModel)]="college" class="long-select margintop">
-      <ion-select-option *ngFor="let item of colleges" value="{{item.id}}"> {{item.label}} </ion-select-option>
-    </ion-select>
-  </ion-item>
+    <ion-label>学校</ion-label>
+    <ion-text>{{collegeName}}</ion-text>
+</ion-item>
 
 
 </ion-list>

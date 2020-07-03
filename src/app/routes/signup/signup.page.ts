@@ -267,6 +267,7 @@ export class SignupPage implements OnInit {
       this.user.college.id = Number(this.college)
       this.user.school.id = Number(this.school)
       this.user.dept.id = Number(this.college)
+      console.log(this.user)
       this.passportService.register(this.isStudent, this.studentForm).then(async (res:any)=>{
         const alert = await this.alertCtrl.create({
           header: '提示',

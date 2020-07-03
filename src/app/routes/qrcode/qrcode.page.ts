@@ -4,17 +4,15 @@ import { CommonService } from 'src/app/services/common.service';
 import { ToastController } from '@ionic/angular';
 import { LocalStorageService, GLOBAL_VARIABLE_KEY, USER_KEY} from 'src/app/services/local-storage.service';
 import { AlertController } from '@ionic/angular';
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 declare const QRious: any;
 @Component({
-  selector: 'app-detail',
-  templateUrl: './detail.page.html',
-  styleUrls: ['./detail.page.scss'],
+  selector: 'app-qrcode',
+  templateUrl: './qrcode.page.html',
+  styleUrls: ['./qrcode.page.scss'],
 })
-export class DetailPage implements OnInit {
-  
+export class QrcodePage implements OnInit {
   college = ''
-  collegeName=''
   school=''
   number=''
   colleges = []
@@ -47,7 +45,7 @@ export class DetailPage implements OnInit {
     'number': ''
   }
   
-
+  @ViewChild('qr', {static: true}) qr: ElementRef;
   constructor(private alertCtrl: AlertController, private router: Router, private httpService:CommonService, private toastCtrl: ToastController, private localStorageService: LocalStorageService) { }
 
   ngOnInit() {
@@ -67,31 +65,36 @@ export class DetailPage implements OnInit {
         this.classInfo[item] = res[item]
       }
       this.college = res['college'].id.toString()
-
-     api= '/mobileApp/course/getTopDeptName?'+'college_id='+this.college
-      this.httpService.ajaxGet(api).then(async (res:any) =>{
-        this.school=res['name']
-        api='/mobileApp/college'
-        this.httpService.ajaxGet(api).then((res:any)=>{
-          for(let i in res){
-            if(this.school==res[i].name){
-              this.number=i
-            }
-          }
-          for(let i in res[this.number].children){     
-            if(this.college==res[this.number].children[i].id){
-              this.collegeName=res[this.number].children[i].label
-            } 
-  
-          }
-        })
-
-      })
-
+      
     })
     this.semesters = this.createSemesters()
 
+    const userInfo = this.localStorageService.get(USER_KEY, '')
+    this.userInfo.phone = userInfo.phone
+    api='/mobileApp/userInfo?phone=' + this.userInfo.phone
+    this.httpService.ajaxGet(api).then(async (res:any)=>{
+      this.userInfo=res
+      api='/mobileApp/college'
+      this.httpService.ajaxGet(api).then((res:any)=>{
 
+        for(let i in res){
+          const item = {
+            'id': res[i].id,
+            'name': res[i].name }
+          this.schools.push(item)
+        }
+      }).catch((err)=>{
+        console.log(err)
+      })
+    }).catch((err)=>{
+      console.log(err)
+    })
+
+    var qr = new QRious({
+      element: this.qr.nativeElement,
+      size: 180,
+      value: this.courseCode
+    })
   }
 
   async change(){
@@ -148,12 +151,20 @@ export class DetailPage implements OnInit {
     this.colleges=[]
     const api='/mobileApp/college'
     this.httpService.ajaxGet(api).then((res:any)=>{
-
+      for(let i in res){
+        if(this.school==res[i].id){
+          this.number=i
+        }
+      }
+      for(let i in res[this.number].children){      
+        const item = {
+          'id': res[this.number].children[i].id,
+          'label': res[this.number].children[i].label
+        }
+        this.colleges.push(item)
+      }
     }).catch((err)=>{
       console.log(err)
     })
-  }
-  gotoQrcode(){
-    this.router.navigateByUrl('/qrcode')
   }
 }

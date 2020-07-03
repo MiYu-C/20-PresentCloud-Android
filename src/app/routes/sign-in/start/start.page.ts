@@ -59,7 +59,7 @@ export class StartPage implements OnInit {
     const api='/mobileApp/release/sign'
     const json = {
       'course':{'id':this.classId},
-      'code':this.password
+      'code':'123456'
     }
     this.httpService.ajaxPost(api,json).then(async (res:any)=>{
       console.log('开始签到')

@@ -26,7 +26,7 @@ export class InfoPage implements OnInit {
     'phone': '',
     'sex': '',
     'status': '',
-    'school': '',
+    'school': { "id": 8 },
     'college': { "id": 8 },
     'number': ''
   }
@@ -76,6 +76,7 @@ export class InfoPage implements OnInit {
     })
   }
   async save() {
+
     this.userInfo['studentNumber'] = this.userInfo.number
     if(this.userInfo.status=="教师"){
       const toast = await this.toastCtrl.create({
@@ -85,6 +86,7 @@ export class InfoPage implements OnInit {
       toast.present()
     }
     else if(this.userInfo.name && this.userInfo.number){
+      this.userInfo.college = {id: Number(this.college)}
       const api='/mobileApp/student/update'
       const json = this.userInfo
       this.httpService.ajaxPost(api,json).then((res:any)=>{

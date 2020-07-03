@@ -37,7 +37,9 @@ export class Member1Page implements OnInit{
     'isDeleted': false
   }
   memberList = []
- 
+  classId=''
+
+  historyList=[]
 
   constructor(private localStorageService:LocalStorageService, private router: Router, private httpService:CommonService, private toastCtrl: ToastController, private alertCtrl: AlertController) { }
 
@@ -49,6 +51,16 @@ export class Member1Page implements OnInit{
       for(let item in res){
         this.classInfo[item] = res[item]
       }
+
+    let api = '/mobileApp/course/info?'+'courseCode='+this.courseCode
+    this.httpService.ajaxGet(api).then(async (res:any) =>{
+      this.classId = res.id
+      api = '/mobileApp/sign/history?courseId='+this.classId+'&studentId='+this.localStorageService.get(USER_KEY,{'id':null}).id
+      this.httpService.ajaxGet(api).then((res:any)=>{
+        this.historyList=res
+        this.convert2DateTime()
+      })
+    })
       // 获取班课成员的接口
       api = '/mobileApp/course/student?'+'id='+this.classInfo.id
       this.httpService.ajaxGet(api).then(async (res:any) =>{
@@ -68,8 +80,33 @@ export class Member1Page implements OnInit{
     }
   }
 
-  gotosign() {
-    this.router.navigateByUrl('/signin');
+  async gotosign() {
+    let api='/mobileApp/sign/check?courseId=' + this.classId
+    this.httpService.ajaxGet(api).then(async (res:any)=>{
+      this.router.navigateByUrl('/signin');
+    }).catch(async (err:any)=>{
+      const toast = await this.toastCtrl.create({
+        message: '老师还未发起签到',
+        duration: 3000
+      })
+      toast.present()
+    })
   }
 
+  async convert2DateTime(){
+    for(let index in this.historyList){
+      const now = new Date(this.historyList[index].time);
+      const year = now.getFullYear();
+      const month = this.padding(now.getMonth() + 1);
+      const date = this.padding(now.getDate());
+      const hour = this.padding(now.getHours());
+      const minute = this.padding(now.getMinutes());
+      const second = this.padding(now.getSeconds());
+      this.historyList[index]['day'] = year + '-' + month + '-' + date
+      this.historyList[index]['time'] = hour + ':' + minute + ':' + second
+    }
+  }
+  padding(number:Number){
+    return number < 10 ? ('0' + number) : number
+  }
 }

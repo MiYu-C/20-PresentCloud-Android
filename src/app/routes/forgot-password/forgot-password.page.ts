@@ -11,13 +11,29 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./forgot-password.page.scss'],
 })
 export class ForgotPasswordPage implements OnInit {
+  async ngOnInit() {
+    const alert = await this.alertCtrl.create({
+      header: '提示',
+      message: '请联系管理员',
+      buttons: [
+        {
+          text: '确定',
+          handler: () => {
+            this.router.navigateByUrl('/login')
+          }
+        }
+      ]
+    })
+    alert.present()
+  }
     isOldPassword = true;
     oldpassword: string;
     newPassword: string;
     checkPassword: string;
     constructor(private userService: UserService,
                 private toastController: ToastController,
-                private navCtrl: NavController, private router: Router) { }
+                private navCtrl: NavController, private router: Router,
+                private alertCtrl: AlertController) { }
     async onSave() {console.log('onSave');
       const oldPass = this.userService.getPassword();
       this.isOldPassword = oldPass == this.oldpassword ? true : false;
@@ -33,7 +49,6 @@ export class ForgotPasswordPage implements OnInit {
       }
     }
   
-    ngOnInit() {
-    }
+
   
   }

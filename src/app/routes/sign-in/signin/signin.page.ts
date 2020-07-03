@@ -17,7 +17,7 @@ export class SigninPage implements OnInit {
   courseCode=''
 
   historyList=[]
-
+  password='123456'
   constructor(private localStorageService:LocalStorageService, private toastCtrl: ToastController, private httpService:CommonService, private alertCtrl: AlertController, private router: Router) { }
 
   ngOnInit() {
@@ -25,7 +25,7 @@ export class SigninPage implements OnInit {
     let api = '/mobileApp/course/info?'+'courseCode='+this.courseCode
     this.httpService.ajaxGet(api).then(async (res:any) =>{
       this.classId = res.id
-      api = '/mobileApp/sign/history?courseId='+this.classId+'&studentId='+this.localStorageService.get(USER_KEY,{'id':null}).id
+    api = '/mobileApp/sign/history?courseId='+this.classId+'&studentId='+this.localStorageService.get(USER_KEY,{'id':null}).id
       this.httpService.ajaxGet(api).then((res:any)=>{
         this.historyList=res
         this.convert2DateTime()
@@ -34,19 +34,23 @@ export class SigninPage implements OnInit {
   }
 
   async signin(){
-    let api='/mobileApp/sign/check?courseId=' + this.classId
-    this.httpService.ajaxGet(api).then(async (res:any)=>{
+    let longitude: any ;
+    let latitude: any;
+    const geolocation = new BMap.Geolocation();
+    await geolocation.getCurrentPosition(function(resp) {
+      const mk = new BMap.Marker(resp.point);
+      alert('你的位置：' + resp.point.lng + ',' + resp.point.lat);
+      longitude = resp.point.lng;
+      latitude = resp.point.lat;
+      console.log(longitude);
+      return longitude;
+    }, { enableHighAccuracy: true });
+    console.log(longitude);
+    this.localStorageService.set('longitude', longitude);
+    this.localStorageService.set('latitude', latitude);
+    console.log(latitude);
 
-    }).catch(async (err:any)=>{
-      const toast = await this.toastCtrl.create({
-        message: '老师还未发起签到',
-        duration: 3000
-      })
-      toast.present()
-    })
-
-
-     api='/mobileApp/sign/student?courseId=' + this.classId + '&code=' + '&studentId=' + this.localStorageService.get(USER_KEY, {'id': null}).id
+    let api='/mobileApp/sign/student?courseId=' + this.classId + '&code=' + this.password + '&studentId=' + this.localStorageService.get(USER_KEY, {'id': null}).id
     this.httpService.ajaxGet(api).then(async (res:any)=>{
       const alert = await this.alertCtrl.create({
         header: '提示',
@@ -55,12 +59,19 @@ export class SigninPage implements OnInit {
           {
             text: '确定',
             handler: () => {
-              this.router.navigateByUrl('/class-tabs1/member1')
+              this.router.navigateByUrl('class-tabs1/member1')
             }
           }
         ]
       })
       alert.present()
+    }).catch(async (err:any)=>{
+      console.log(err)
+      const toast = await this.toastCtrl.create({
+        message: err.msg,
+        duration: 3000
+      })
+      toast.present()
     })
   }
 
