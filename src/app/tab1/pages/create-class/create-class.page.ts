@@ -11,17 +11,18 @@ import { LocalStorageService, USER_KEY } from 'src/app/services/local-storage.se
   styleUrls: ['./create-class.page.scss'],
 })
 export class CreateClassPage implements OnInit {
-
   college = ''
+  school=''
+  number=''
   colleges = []
-
+  schools=[]
   semesters = []
 
   classInfo = {
     'courseName': '',
     'className': '',
     'semester': '',
-    'school': '',
+    'school': {},
     'college': {}
   }
 
@@ -30,12 +31,11 @@ export class CreateClassPage implements OnInit {
   ngOnInit() {
     const api='/mobileApp/college'
     this.httpService.ajaxGet(api).then((res:any)=>{
-      for(let i in res[0].children){
+      for(let i in res){
         const item = {
-          'id': res[0].children[i].id,
-          'label': res[0].children[i].label
-        }
-        this.colleges.push(item)
+          'id': res[i].id,
+          'name': res[i].name }
+        this.schools.push(item)
       }
     }).catch((err)=>{
       console.log(err)
@@ -56,9 +56,6 @@ export class CreateClassPage implements OnInit {
           case 'semester':
             info = '学期'
             break
-          case 'school':
-            info = '学校'
-            break
         }
         const toast = await this.toastCtrl.create({
           message: info + ' 不能为空',
@@ -67,6 +64,14 @@ export class CreateClassPage implements OnInit {
         toast.present()
         return
       }
+    }
+    if(JSON.stringify(this.classInfo['school']) == '{}' && !this.school){
+      const toast = await this.toastCtrl.create({
+        message: '学校 不能为空',
+        duration: 3000
+      })
+      toast.present()
+      return
     }
     if(JSON.stringify(this.classInfo['college']) == '{}' && !this.college){
       const toast = await this.toastCtrl.create({
@@ -98,7 +103,26 @@ export class CreateClassPage implements OnInit {
       console.log(err)
     })
   }
-
+  checkSchool(){
+    this.colleges=[]
+    const api='/mobileApp/college'
+    this.httpService.ajaxGet(api).then((res:any)=>{
+      for(let i in res){
+        if(this.school==res[i].id){
+          this.number=i
+        }
+      }
+      for(let i in res[this.number].children){      
+        const item = {
+          'id': res[this.number].children[i].id,
+          'label': res[this.number].children[i].label
+        }
+        this.colleges.push(item)
+      }
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }
   createSemesters(){
     var semesters = []
     const now = new Date()

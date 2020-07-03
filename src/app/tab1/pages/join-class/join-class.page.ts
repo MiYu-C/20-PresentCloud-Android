@@ -3,7 +3,7 @@ import { ToastController, IonSlides, AlertController } from '@ionic/angular';
 import { CommonService } from 'src/app/services/common.service';
 import { LocalStorageService, USER_KEY } from 'src/app/services/local-storage.service';
 import { Router } from '@angular/router';
-import{ BarcodeScanner }from'@ionic-native/barcode-scanner';
+import{ BarcodeScanner }from'@ionic-native/barcode-scanner/ngx';
 
 @Component({
   selector: 'app-join-class',

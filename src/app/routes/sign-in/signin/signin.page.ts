@@ -12,65 +12,72 @@ declare var BMap;
   styleUrls: ['./signin.page.scss'],
 })
 export class SigninPage implements OnInit {
-  classId=''
 
-  historyList=[
-    {
-      'id':1,
-      'day':'2020-02-29',
-      'time':'08:02',
-      'isSignined':true
-    },
-    {
-      'id':2,
-      'day':'2020-03-07',
-      'time':'08:01',
-      'isSignined':false
-    }
-  ]
+  classId=''
+  courseCode=''
+
+  historyList=[]
 
   constructor(private localStorageService:LocalStorageService, private toastCtrl: ToastController, private httpService:CommonService, private alertCtrl: AlertController, private router: Router) { }
 
   ngOnInit() {
-    this.classId = this.localStorageService.get(GLOBAL_VARIABLE_KEY, '').clasId
+    this.courseCode = this.localStorageService.get(GLOBAL_VARIABLE_KEY, '').courseCode
+    let api = '/mobileApp/course/info?'+'courseCode='+this.courseCode
+    this.httpService.ajaxGet(api).then(async (res:any) =>{
+      this.classId = res.id
+      api = '/mobileApp/sign/history?courseId='+this.classId+'&studentId='+this.localStorageService.get(USER_KEY,{'id':null}).id
+      this.httpService.ajaxGet(api).then((res:any)=>{
+        this.historyList=res
+        this.convert2DateTime()
+      })
+    })
   }
 
   async signin(){
-    const api='/class/signin/join'
-    const json={
-      'classId': this.classId
-    }
-    this.httpService.ajaxPost(api, json).then(async (res:any)=>{
-      if(res.code == 400){
-        const toast = await this.toastCtrl.create({
-          message: '老师还未发起签到或签到已结束',
-          duration: 3000
-        })
-        toast.present()
-      }else if(res.code == 200){
-        const api = '/class/signin/join/common'
-        const json={
-          'classId': this.classId,
-          'phone': this.localStorageService.get(USER_KEY,'').phone
-        }
-        this.httpService.ajaxPost(api,json).then(async (res:any)=>{
-          const alert = await this.alertCtrl.create({
-            header: '提示',
-            message: '签到成功',
-            buttons: [
-              {
-                text: '确定',
-                handler: () => {
-                  this.router.navigateByUrl('/home/class/detail/members')
-                }
-              }
-            ]
-          })
-          alert.present()
-        })
-      }else if(res.code == 202){
-        this.router.navigateByUrl('/home/class/detail/members/join-signin/signin')
-      }
+    let api='/mobileApp/sign/check?courseId=' + this.classId
+    this.httpService.ajaxGet(api).then(async (res:any)=>{
+
+    }).catch(async (err:any)=>{
+      const toast = await this.toastCtrl.create({
+        message: '老师还未发起签到',
+        duration: 3000
+      })
+      toast.present()
     })
+
+
+     api='/mobileApp/sign/student?courseId=' + this.classId + '&code=' + '&studentId=' + this.localStorageService.get(USER_KEY, {'id': null}).id
+    this.httpService.ajaxGet(api).then(async (res:any)=>{
+      const alert = await this.alertCtrl.create({
+        header: '提示',
+        message: '签到成功',
+        buttons: [
+          {
+            text: '确定',
+            handler: () => {
+              this.router.navigateByUrl('/class-tabs1/member1')
+            }
+          }
+        ]
+      })
+      alert.present()
+    })
+  }
+
+  async convert2DateTime(){
+    for(let index in this.historyList){
+      const now = new Date(this.historyList[index].time);
+      const year = now.getFullYear();
+      const month = this.padding(now.getMonth() + 1);
+      const date = this.padding(now.getDate());
+      const hour = this.padding(now.getHours());
+      const minute = this.padding(now.getMinutes());
+      const second = this.padding(now.getSeconds());
+      this.historyList[index]['day'] = year + '-' + month + '-' + date
+      this.historyList[index]['time'] = hour + ':' + minute + ':' + second
+    }
+  }
+  padding(number:Number){
+    return number < 10 ? ('0' + number) : number
   }
 }

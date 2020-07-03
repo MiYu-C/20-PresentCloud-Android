@@ -32,15 +32,18 @@
           <ion-input style='text-align:right'placeholder={{userInfo.sex}}  [(ngModel)]="userInfo.sex"> </ion-input>
         </ion-item>
         <ion-item>
-          <ion-label><b>学校：</b></ion-label>
-          <ion-input style='text-align:right'placeholder={{userInfo.school}}  [(ngModel)]="userInfo.school"> </ion-input>
-        </ion-item>
-        <ion-item
-        lines="none"
-        class="bottom_border"
-      >
-        <ion-label><b>学院:</b></ion-label>
-        <ion-select required placeholder={{userInfo.college}} name="college" [(ngModel)]="college" class="long-select">
+            <ion-label><b>身份：</b></ion-label>
+            <ion-text > {{userInfo.status}}</ion-text>
+          </ion-item>
+        <ion-item>
+          <ion-label><b>学校</b></ion-label>
+        <ion-select (ionChange)="checkSchool($event)" required placeholder={{userInfo.school}} name="school" [(ngModel)]="school" class="long-select margintop">
+          <ion-select-option *ngFor="let item of schools" value="{{item.id}}"> {{item.name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label><b>学院</b></ion-label>
+        <ion-select required placeholder={{userInfo.college}} name="college" [(ngModel)]="college" class="long-select margintop">
           <ion-select-option *ngFor="let item of colleges" value="{{item.id}}"> {{item.label}} </ion-select-option>
         </ion-select>
       </ion-item>

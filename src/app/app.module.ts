@@ -11,7 +11,9 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LocalStorageService } from './services/local-storage.service';
 import { CommonService } from './services/common.service';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import{ BarcodeScanner }from'@ionic-native/barcode-scanner/ngx';
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -27,7 +29,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     LocalStorageService,
     CommonService,
-    BarcodeScanner
+    BarcodeScanner,
   ],
   bootstrap: [AppComponent]
 })

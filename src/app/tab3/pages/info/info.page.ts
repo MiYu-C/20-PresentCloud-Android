@@ -16,8 +16,10 @@ export class InfoPage implements OnInit {
   name: ''
 
   college = ''
+  school=''
+  number=''
   colleges = []
-
+  schools=[]
   userInfo = {
     'id': '',
     'name': '',
@@ -39,15 +41,12 @@ export class InfoPage implements OnInit {
       this.userInfo=res
       api='/mobileApp/college'
       this.httpService.ajaxGet(api).then((res:any)=>{
-        for(let i in res[0].children){
-          if(res[0].children[i].label === this.userInfo.college){
-            this.college = res[0].children[i].id.toString()
-          }
+
+        for(let i in res){
           const item = {
-            'id': res[0].children[i].id,
-            'label': res[0].children[i].label
-          }
-          this.colleges.push(item)
+            'id': res[i].id,
+            'name': res[i].name }
+          this.schools.push(item)
         }
       }).catch((err)=>{
         console.log(err)
@@ -56,11 +55,36 @@ export class InfoPage implements OnInit {
       console.log(err)
     })
   }
-
+  checkSchool(){
+    this.colleges=[]
+    const api='/mobileApp/college'
+    this.httpService.ajaxGet(api).then((res:any)=>{
+      for(let i in res){
+        if(this.school==res[i].id){
+          this.number=i
+        }
+      }
+      for(let i in res[this.number].children){      
+        const item = {
+          'id': res[this.number].children[i].id,
+          'label': res[this.number].children[i].label
+        }
+        this.colleges.push(item)
+      }
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }
   async save() {
-    this.userInfo.college = {id: Number(this.college)}
     this.userInfo['studentNumber'] = this.userInfo.number
-    if(this.userInfo.name && this.userInfo.number){
+    if(this.userInfo.status=="教师"){
+      const toast = await this.toastCtrl.create({
+        message: '教师请到后台修改信息',
+        duration: 3000,
+      })
+      toast.present()
+    }
+    else if(this.userInfo.name && this.userInfo.number){
       const api='/mobileApp/student/update'
       const json = this.userInfo
       this.httpService.ajaxPost(api,json).then((res:any)=>{

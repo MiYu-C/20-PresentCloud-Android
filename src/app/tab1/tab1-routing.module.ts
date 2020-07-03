@@ -15,11 +15,6 @@ const routes: Routes = [
     path: 'create-class',
     loadChildren: () => import('./pages/create-class/create-class.module').then( m => m.CreateClassPageModule)
   },
-  {
-    path: 'create-code',
-    loadChildren: () => import('./pages/create-code/create-code.module').then( m => m.CreatcodePageModule)
-  },
-
 ];
 
 @NgModule({

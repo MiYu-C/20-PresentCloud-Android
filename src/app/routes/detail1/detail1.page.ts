@@ -10,6 +10,12 @@ import { AlertController } from '@ionic/angular';
 })
 export class Detail1Page implements OnInit {
 
+  college = ''
+  school=''
+  number=''
+  colleges = []
+  schools=[]
+
   courseCode = ''
 
   isTeacher = true
@@ -21,72 +27,85 @@ export class Detail1Page implements OnInit {
     'className': '',
     'teacherName': '',
     'semester': '',
-    'school': '福州大学',
+    'school': '',
     'college': {},
     'joinPermission': null,
     'enabled': null,
   }
-
+  userInfo = {
+    'id': '',
+    'name': '',
+    'phone': '',
+    'sex': '',
+    'status': '',
+    'school': '',
+    'college': { "id": 8 },
+    'number': ''
+  }
   constructor(private localStorageService:LocalStorageService, private router: Router, private httpService:CommonService, private alertCtrl: AlertController) { }
 
   ngOnInit() {
-    const userInfo = this.localStorageService.get(USER_KEY,'')
+   
     this.courseCode = this.localStorageService.get(GLOBAL_VARIABLE_KEY,'').courseCode
-    let api = '/mobile/course/check?'+'courseCode='+this.courseCode+'&'+'phone='+userInfo.phone
-    this.httpService.ajaxGet(api).then(res =>{
-      this.isTeacher = true
-    }).catch(err =>{
-      this.isTeacher = false
-    })
-    api = '/mobile/course/info?'+'courseCode='+this.courseCode
+    let api = '/mobileApp/course/info?'+'courseCode='+this.courseCode
     this.httpService.ajaxGet(api).then(async (res:any) =>{
       for(let item in res){
         this.classInfo[item] = res[item]
       }
     })
-  }
 
-  async checkboxChange(){
-    let api = '/mobile/course/update'
-    const json = {
-      'id': this.classInfo.id,
-      'joinPermission': this.classInfo.joinPermission
-    }
-    this.httpService.ajaxPut(api, json).then(async (res:any) =>{
-      console.log('change to ' + json.joinPermission + ' success')
+    this.courseCode = this.localStorageService.get(GLOBAL_VARIABLE_KEY,'').courseCode
+    api = '/mobileApp/course/info?'+'courseCode='+this.courseCode
+    this.httpService.ajaxGet(api).then(async (res:any) =>{
+      for(let item in res){
+        this.classInfo[item] = res[item]
+      }
+      this.college = res['college'].id.toString()
+    })
+
+    const userInfo = this.localStorageService.get(USER_KEY, '')
+    this.userInfo.phone = userInfo.phone
+    api='/mobileApp/userInfo?phone=' + this.userInfo.phone
+    this.httpService.ajaxGet(api).then(async (res:any)=>{
+      this.userInfo=res
+      api='/mobileApp/college'
+      this.httpService.ajaxGet(api).then((res:any)=>{
+
+        for(let i in res){
+          const item = {
+            'id': res[i].id,
+            'name': res[i].name }
+          this.schools.push(item)
+        }
+      }).catch((err)=>{
+        console.log(err)
+      })
+    }).catch((err)=>{
+      console.log(err)
     })
   }
 
-  async doChange(){
-    this.router.navigateByUrl('/home/class/detail/details/info')
-  }
-
-
 
   async exitClass(){
-    // const alert = await this.alertCtrl.create({
-    //   header: '警告',
-    //   message: '是否退出当前班课',
-    //   buttons: [
-    //     {
-    //       text: '取消',
-    //       role: 'cancel'
-    //     },
-    //     {
-    //       text: '确定',
-    //       handler: () => {
-    //         const api = '/class/change/exit'
-    //         const json = {
-    //           'number': this.classId,
-    //           'phone': this.localStorageService.get(GLOBAL_VARIABLE_KEY,'').phone
-    //         }
-    //         this.httpService.ajaxPost(api,json).then(async (res:any)=>{
-    //           window.location.replace('/home/class')
-    //         })
-    //       }
-    //     }
-    //   ]
-    // })
-    // alert.present()
+    const alert = await this.alertCtrl.create({
+      header: '警告',
+      message: '是否退出当前班课',
+      buttons: [
+        {
+          text: '取消',
+          role: 'cancel'
+        },
+        {
+          text: '确定',
+          handler: () => {
+            const api = '/mobileApp/quit/course?'+'userId='+this.localStorageService.get(USER_KEY, {"id":null}).id+'&'+'courseCode='+this.courseCode
+            this.httpService.ajaxGet(api).then(async (res:any)=>{
+              window.location.replace('tabs/tab1')
+            })
+          }
+        }
+      ]
+    })
+    alert.present()
   }
 }

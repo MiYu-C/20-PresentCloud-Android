@@ -11,43 +11,61 @@
 </ion-header>
 <ion-content>
 <ion-list class="ion-padding">
+
+    <ion-item  class="card" lines="none" >
+        <ion-thumbnail slot="start">
+          <ion-img src="/assets/img/class.png"></ion-img>
+        </ion-thumbnail>
+        <ion-label>
+          <h2>{{classInfo.courseName}}</h2>
+          <h2>{{classInfo.className}}</h2>
+          <p>{{classInfo.semester}}</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item     lines="none"
+      class="hori_border">
+        <ion-label>班课号</ion-label>
+        <ion-text>{{classInfo.courseCode}}</ion-text>
+      </ion-item>
+
   <ion-item
     lines="none"
     class="hori_border"
   >
     <ion-label>课程</ion-label>
-    <ion-input class="input_text" slot="end" placeholder="未设置" [(ngModel)]="classInfo.courseName"></ion-input>
+    <ion-input class="input_text" slot="end" placeholder={{classInfo.courseName}} [(ngModel)]="classInfo.courseName"></ion-input>
   </ion-item>
   <ion-item
     lines="none"
     class="bottom_border"
   >
     <ion-label>班级</ion-label>
-    <ion-input class="input_text" slot="end" placeholder="未设置" [(ngModel)]="classInfo.className"></ion-input>
+    <ion-input class="input_text" slot="end" placeholder={{classInfo.className}} [(ngModel)]="classInfo.className"></ion-input>
   </ion-item>
   <ion-item
     lines="none"
     class="bottom_border"
   >
     <ion-label>学期</ion-label>
-    <ion-input class="input_text" slot="end" placeholder="未设置" [(ngModel)]="classInfo.semester"></ion-input>
+    <ion-input class="input_text" slot="end" placeholder={{classInfo.semester}} [(ngModel)]="classInfo.semester"></ion-input>
   </ion-item>
-  <ion-item
-    lines="none"
-    class="bottom_border"
-  >
-    <ion-label>学校</ion-label>
-    <ion-input class="input_text" slot="end" placeholder="未设置" [(ngModel)]="classInfo.school"></ion-input>
+
+
+  <ion-item>
+      <ion-label>学校</ion-label>
+    <ion-select (ionChange)="checkSchool($event)" required placeholder={{userInfo.school}} name="school" [(ngModel)]="school" class="long-select margintop">
+      <ion-select-option *ngFor="let item of schools" value="{{item.id}}"> {{item.name}}</ion-select-option>
+    </ion-select>
   </ion-item>
-  <ion-item
-    lines="none"
-    class="bottom_border"
-  >
-    <ion-label>院系</ion-label>
-    <ion-select required placeholder="请选择学院" name="college" [(ngModel)]="college" class="long-select">
+  <ion-item>
+    <ion-label>学院</ion-label>
+    <ion-select required placeholder={{userInfo.college}} name="college" [(ngModel)]="college" class="long-select margintop">
       <ion-select-option *ngFor="let item of colleges" value="{{item.id}}"> {{item.label}} </ion-select-option>
     </ion-select>
   </ion-item>
+
+
 </ion-list>
 
 <br />
