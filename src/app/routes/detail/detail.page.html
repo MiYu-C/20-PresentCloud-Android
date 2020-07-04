@@ -21,14 +21,11 @@
           <h2>{{classInfo.className}}</h2>
           <p>{{classInfo.semester}}</p>
         </ion-label>
+        <div> 
+          <ion-button slot="icon-only" size="big" fill="clear" (click)="gotoQrcode()" style="float:right"><ion-icon name="qr-code-outline"></ion-icon>二维码</ion-button>
+        </div>
+        
       </ion-item>
-      <ion-button
-      expand="block"
-      style="width: 80%; margin: auto;"
-      (click)="gotoQrcode()"
-    >
-      查看课程二维码
-    </ion-button>
       <ion-item     lines="none"
       class="hori_border">
         <ion-label>班课号</ion-label>
@@ -40,21 +37,21 @@
     class="hori_border"
   >
     <ion-label>课程</ion-label>
-    <ion-input class="input_text" slot="end" placeholder={{classInfo.courseName}} [(ngModel)]="classInfo.courseName"></ion-input>
+    <ion-input style='text-align:right' class="input_text" slot="end" placeholder={{classInfo.courseName}} [(ngModel)]="classInfo.courseName"></ion-input>
   </ion-item>
   <ion-item
     lines="none"
     class="bottom_border"
   >
     <ion-label>班级</ion-label>
-    <ion-input class="input_text" slot="end" placeholder={{classInfo.className}} [(ngModel)]="classInfo.className"></ion-input>
+    <ion-input style='text-align:right' class="input_text" slot="end" placeholder={{classInfo.className}} [(ngModel)]="classInfo.className"></ion-input>
   </ion-item>
   <ion-item
     lines="none"
     class="bottom_border"
   >
     <ion-label>学期</ion-label>
-    <ion-input class="input_text" slot="end" placeholder={{classInfo.semester}} [(ngModel)]="classInfo.semester"></ion-input>
+    <ion-input style='text-align:right' class="input_text" slot="end" placeholder={{classInfo.semester}} [(ngModel)]="classInfo.semester"></ion-input>
   </ion-item>
 
 
@@ -80,13 +77,4 @@
   保存
 </ion-button>
 
-<br />
-<ion-button
-  expand="block"
-  style="width: 80%; margin: auto;"
-  (click)="closeClass()"
-  color="danger"
->
-  结束班课
-</ion-button>
 </ion-content>

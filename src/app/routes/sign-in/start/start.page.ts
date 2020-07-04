@@ -115,16 +115,11 @@ export class StartPage implements OnInit {
 
   async back(){
     if (this.isStart == true){
-      const alert = await this.alertCtrl.create({
-        header: '提示',
-        message: '请先结束签到！',
-        buttons: [
-          {
-            text: '确定',
-          }
-        ]
+      const toast = await this.toastCtrl.create({
+        message: '请先结束签到',
+        duration: 3000,
       })
-      alert.present()
+      toast.present()
     }else{
       this.router.navigateByUrl('/class-tabs/member')
     }

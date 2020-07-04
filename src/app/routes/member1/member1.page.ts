@@ -86,7 +86,7 @@ export class Member1Page implements OnInit{
       this.router.navigateByUrl('/signin');
     }).catch(async (err:any)=>{
       const toast = await this.toastCtrl.create({
-        message: '老师还未发起签到',
+        message: '未发起签到',
         duration: 3000
       })
       toast.present()

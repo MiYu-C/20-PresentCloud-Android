@@ -48,7 +48,7 @@ export class JoinClassPage implements OnInit {
       }).catch(async (err)=>{
         console.log(err)
         const toast = await this.toastCtrl.create({
-          message: '该班课不存在，请重新输入或扫描',
+          message: '班课不存在',
           duration: 3000
         })
         toast.present()
@@ -67,49 +67,42 @@ export class JoinClassPage implements OnInit {
     const api = '/mobileApp/join/course?'+'userId='+this.localStorageService.get(USER_KEY, {"id":null}).id+'&'+'courseCode='+this.classNumber
     this.httpService.ajaxGet(api).then(async (res:any)=>{
       console.log(res)
-      const alert = await this.alertCtrl.create({
-        header: '提示',
-        backdropDismiss: false,
-        message: '您已加入班课 '+this.classInfo.name,
-        buttons: [{
-          text: '确定',
-          handler: () => {
-            window.location.replace('tabs/tab1')
-          }
-        }]
+      window.location.replace('tabs/tab1')
+      const toast = await this.toastCtrl.create({
+        message: '加入成功',
+        duration: 3000
       })
-      alert.present()
+      toast.present()
+
     }).catch(async (err)=>{
       if(err.status == 409){
         const alert = await this.alertCtrl.create({
-          header: '警告',
-          message: '班课 '+this.classInfo.name+' 不允许加入'
+          message: '班课加入失败'
         })
         alert.present()
       }else if(err.status == 400){
-        const alert = await this.alertCtrl.create({
-          header: '警告',
-          message: '请勿重复加入班课 '+this.classInfo.name
+        const toast = await this.toastCtrl.create({
+          message: '你已加入该班课',
+          duration: 3000
         })
-        alert.present()
+        toast.present()
       }
     })
   }
 
   scanQrCode(){
     this.barcodeScanner.scan().then(async (barcodeData:any) => {
-      if(barcodeData.length != 7){
+      if(!barcodeData.text || barcodeData.text.length != 7){
         const alert = await this.alertCtrl.create({
-          header: '警告',
-          message: '您扫描的二维码有误'
+          message: '无法读取课程二维码'
         })
         alert.present()
       }else{
-        this.classNumber = barcodeData
+        this.classNumber = barcodeData.text
         this.findClass()
       }
     }).catch(err => {
-      console.log(err)
+      alert(err)
     })
   }
 }

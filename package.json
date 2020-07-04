@@ -76,7 +76,8 @@
       "cordova-plugin-whitelist": {},
       "cordova-plugin-advanced-http": {
         "OKHTTP_VERSION": "3.10.0"
-      }
+      },
+      "phonegap-plugin-barcodescanner": {}
     },
     "platforms": [
       "android"

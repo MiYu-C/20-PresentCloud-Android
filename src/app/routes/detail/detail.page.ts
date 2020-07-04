@@ -100,7 +100,7 @@ export class DetailPage implements OnInit {
     json['college'] = {id: this.college}
     console.log(json)
     const toast = await this.toastCtrl.create({
-      message: '信息修改成功',
+      message: '班课信息修改成功',
       duration: 3000,
     })
     toast.present()
@@ -108,6 +108,7 @@ export class DetailPage implements OnInit {
   
   async closeClass(){
     const alert = await this.alertCtrl.create({
+      header: '警告',
       message: '是否结束当前班课',
       buttons: [
         {

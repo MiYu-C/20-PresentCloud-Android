@@ -286,7 +286,6 @@ export class SignupPage implements OnInit {
       this.user.dept.id = Number(this.college)
       this.passportService.register(this.isStudent, this.teacherForm).then(async (res:any)=>{
         const alert = await this.alertCtrl.create({
-          header: '提示',
           message: '注册成功',
           buttons: ['确定']
         })

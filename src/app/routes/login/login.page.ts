@@ -28,13 +28,13 @@ export class LoginPage implements OnInit {
     // 验证输入是否合法
     if (this.login.userName === '') {
       const toast = await this.toastCtrl.create({
-        message: '请输入您的手机号码',
+        message: '请输入手机号码',
         duration: 3000
       })
       toast.present()
     } else if (this.login.password === '') {
       const toast = await this.toastCtrl.create({
-        message: '请输入您的密码',
+        message: '请输入密码',
         duration: 3000
       })
       toast.present()
@@ -58,7 +58,7 @@ export class LoginPage implements OnInit {
         console.log(err)
         if (err.status == 400){
           const toast = await this.toastCtrl.create({
-            message: '密码不正确',
+            message: '密码错误',
             duration: 3000,
             buttons: [
               {
@@ -73,7 +73,7 @@ export class LoginPage implements OnInit {
           toast.present()
         }else if (err.status == 404){
           const toast = await this.toastCtrl.create({
-            message: '帐号不存在',
+            message: '该帐号不存在',
             duration: 3000,
             buttons: [
               {

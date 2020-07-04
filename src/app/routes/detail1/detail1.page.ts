@@ -79,8 +79,7 @@ export class Detail1Page implements OnInit {
 
   async exitClass(){
     const alert = await this.alertCtrl.create({
-      header: '警告',
-      message: '是否退出当前班课',
+      message: '是否要退出当前班课',
       buttons: [
         {
           text: '取消',

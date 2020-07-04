@@ -89,9 +89,8 @@ export class CreateClassPage implements OnInit {
     this.classInfo.school = { id : Number(this.school) }
     this.httpService.ajaxPost(api, this.classInfo).then(async (res:any)=>{
       const alert = await this.alertCtrl.create({
-        header: '提示',
         backdropDismiss: false,
-        message: '课程 '+this.classInfo.courseName+' 已创建',
+        message: '课程已创建',
         buttons: [{
           text: '确定',
           handler: () => {

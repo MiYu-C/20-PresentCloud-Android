@@ -52,16 +52,11 @@ export class SigninPage implements OnInit {
 
     let api='/mobileApp/sign/student?courseId=' + this.classId + '&code=' + this.password + '&studentId=' + this.localStorageService.get(USER_KEY, {'id': null}).id
     this.httpService.ajaxGet(api).then(async (res:any)=>{
-      const alert = await this.alertCtrl.create({
-        header: '提示',
+      const toast = await this.toastCtrl.create({
         message: '签到成功',
-        buttons: [
-          {
-            text: '确定',
-          }
-        ]
+        duration: 3000,
       })
-      alert.present()
+      toast.present()
     }).catch(async (err:any)=>{
       console.log(err)
       const toast = await this.toastCtrl.create({

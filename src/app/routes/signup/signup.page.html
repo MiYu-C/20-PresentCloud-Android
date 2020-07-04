@@ -78,27 +78,27 @@
         <ion-list>
             <ion-item>
                 <ion-label position="fixed">姓名</ion-label>
-                <ion-input lines="none" placeholder="输入姓名" name="name" type="name" required="true" [(ngModel)]="user.name"> 
+                <ion-input lines="none" style='text-align:right' placeholder="输入姓名" name="name" type="name" required="true" [(ngModel)]="user.name"> 
                 </ion-input>
             </ion-item>
             <ion-item>
                 <ion-label position="fixed">用户名</ion-label>
-                <ion-input lines="none" placeholder="输入用户名" name="nickname" type="nickname" required="true" [(ngModel)]="user.nickname"> 
+                <ion-input lines="none" style='text-align:right' placeholder="输入用户名" name="nickname" type="nickname" required="true" [(ngModel)]="user.nickname"> 
                 </ion-input>
             </ion-item>
             <ion-item>
                 <ion-label position="fixed">邮箱</ion-label>
-                <ion-input lines="none" placeholder="输入邮箱" name="email" type="email" required="true" [(ngModel)]="user.email"> 
+                <ion-input lines="none" style='text-align:right'  placeholder="输入邮箱" name="email" type="email" required="true" [(ngModel)]="user.email"> 
                 </ion-input>
             </ion-item>
           <ion-item>
-              <ion-label position="fixed">学校</ion-label>
+              <ion-label >学校</ion-label>
             <ion-select (ionChange)="checkSchool($event)" required placeholder="请选择" name="school" [(ngModel)]="school" class="long-select margintop">
               <ion-select-option *ngFor="let item of schools" value="{{item.id}}"> {{item.name}}</ion-select-option>
             </ion-select>
           </ion-item>
           <ion-item>
-              <ion-label position="fixed">学院</ion-label>
+              <ion-label >学院</ion-label>
             <ion-select required placeholder="请选择" name="college" [(ngModel)]="college" class="long-select margintop">
               <ion-select-option *ngFor="let item of colleges" value="{{item.id}}"> {{item.label}} </ion-select-option>
             </ion-select>
@@ -106,11 +106,11 @@
 
           <ion-item>
               <ion-label position="fixed">学号/工号</ion-label>
-              <ion-input  placeholder="输入学号/工号" name="number" type="number" required="true" [(ngModel)]="user.number"> 
+              <ion-input  placeholder="输入学号/工号" style='text-align:right' name="number" type="number" required="true" [(ngModel)]="user.number"> 
               </ion-input>
           </ion-item>
           <ion-item mode='android'>
-            <ion-label>性别&nbsp;<ion-text color="danger">*</ion-text></ion-label>
+            <ion-label>性别</ion-label>
             <ion-select (ionChange)="checkSex($event)" name="sex" [(ngModel)]="user.sex" interface="action-sheet">
               <ion-select-option value='男'>男</ion-select-option>
               <ion-select-option value='女'>女</ion-select-option>
