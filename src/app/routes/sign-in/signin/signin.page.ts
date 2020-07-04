@@ -58,9 +58,6 @@ export class SigninPage implements OnInit {
         buttons: [
           {
             text: '确定',
-            handler: () => {
-              this.router.navigateByUrl('class-tabs1/member1')
-            }
           }
         ]
       })

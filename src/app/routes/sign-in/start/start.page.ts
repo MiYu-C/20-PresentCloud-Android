@@ -113,6 +113,24 @@ export class StartPage implements OnInit {
     alert.present()
   }
 
+  async back(){
+    if (this.isStart == true){
+      const alert = await this.alertCtrl.create({
+        header: '提示',
+        message: '请先结束签到！',
+        buttons: [
+          {
+            text: '确定',
+          }
+        ]
+      })
+      alert.present()
+    }else{
+      this.router.navigateByUrl('/class-tabs/member')
+    }
+  }
+
+
   async convert2DateTime(){
     for(let index in this.attendances){
       const now = new Date(this.attendances[index].signTime);
