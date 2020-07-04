@@ -1,5 +1,7 @@
 {
   "name": "Present-Cloud",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

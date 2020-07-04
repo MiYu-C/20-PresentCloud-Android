@@ -5,7 +5,7 @@ import { ToastController } from '@ionic/angular';
 import { LocalStorageService, GLOBAL_VARIABLE_KEY, USER_KEY} from 'src/app/services/local-storage.service';
 import { AlertController } from '@ionic/angular';
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-declare const QRious: any;
+import QRious from 'QRious';
 @Component({
   selector: 'app-qrcode',
   templateUrl: './qrcode.page.html',
