@@ -38,7 +38,7 @@ export class CreateClassPage implements OnInit {
         this.schools.push(item)
       }
     }).catch((err)=>{
-      console.log(err)
+      //console.log(err)
     })
   }
 
@@ -100,7 +100,7 @@ export class CreateClassPage implements OnInit {
       })
       alert.present()
     }).catch(err=>{
-      console.log(err)
+      //console.log(err)
     })
   }
   checkSchool(){
@@ -120,7 +120,7 @@ export class CreateClassPage implements OnInit {
         this.colleges.push(item)
       }
     }).catch((err)=>{
-      console.log(err)
+      //console.log(err)
     })
   }
   createSemesters(){

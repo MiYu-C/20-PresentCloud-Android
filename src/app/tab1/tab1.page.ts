@@ -45,10 +45,10 @@ export class Tab1Page {
         api='/mobileApp/college'
         this.httpService.ajaxGet(api).then((res:any)=>{
         }).catch((err)=>{
-          console.log(err)
+          //console.log(err)
         })
       }).catch((err)=>{
-        console.log(err)
+        //console.log(err)
       })
 
     }

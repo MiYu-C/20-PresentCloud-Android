@@ -46,7 +46,7 @@ export class JoinClassPage implements OnInit {
         this.slideIndex = 2
         this.joinClassSlides.lockSwipeToNext(true)
       }).catch(async (err)=>{
-        console.log(err)
+       // console.log(err)
         const toast = await this.toastCtrl.create({
           message: '班课不存在',
           duration: 3000
@@ -66,7 +66,7 @@ export class JoinClassPage implements OnInit {
   async join(){
     const api = '/mobileApp/join/course?'+'userId='+this.localStorageService.get(USER_KEY, {"id":null}).id+'&'+'courseCode='+this.classNumber
     this.httpService.ajaxGet(api).then(async (res:any)=>{
-      console.log(res)
+      //console.log(res)
       window.location.replace('tabs/tab1')
       const toast = await this.toastCtrl.create({
         message: '加入成功',

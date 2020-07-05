@@ -42,16 +42,16 @@ export class SigninPage implements OnInit {
       alert('您的位置：' + resp.point.lng + ',' + resp.point.lat);
       longitude = resp.point.lng;
       latitude = resp.point.lat;
-      console.log(longitude);
+      //console.log(longitude);
       // this.LocalStorageService.set('longitude', resp.point.lng);
       // this.LocalStorageService.set('latitude', resp.point.lat);
       // this.NavController.navigateForward('\start');
       return longitude;
     }, { enableHighAccuracy: true });
-    console.log(longitude);
+    //console.log(longitude);
     this.localStorageService.set('longitude', longitude);
     this.localStorageService.set('latitude', latitude);
-    console.log(latitude);
+    //console.log(latitude);
 
 
     let api='/mobileApp/sign/student?courseId=' + this.classId + '&code=' + this.password + '&studentId=' + this.localStorageService.get(USER_KEY, {'id': null}).id
@@ -70,7 +70,7 @@ export class SigninPage implements OnInit {
       })
       alert.present()
     }).catch(async (err:any)=>{
-      console.log(err)
+      //console.log(err)
       const toast = await this.toastCtrl.create({
         message: err.msg,
         duration: 3000

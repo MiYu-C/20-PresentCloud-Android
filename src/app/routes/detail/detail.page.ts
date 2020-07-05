@@ -84,7 +84,7 @@ export class DetailPage implements OnInit {
     const api = '/mobileApp/course/update'
     let json = this.classInfo
     json['college'] = {id: this.college}
-    console.log(json)
+    //console.log(json)
     const toast = await this.toastCtrl.create({
       message: '班课信息修改成功',
       duration: 3000,
@@ -98,7 +98,7 @@ export class DetailPage implements OnInit {
     this.httpService.ajaxGet(api).then((res:any)=>{
 
     }).catch((err)=>{
-      console.log(err)
+      //console.log(err)
     })
   }
   gotoQrcode(){

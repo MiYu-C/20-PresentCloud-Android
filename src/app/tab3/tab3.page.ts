@@ -48,10 +48,10 @@ export class Tab3Page {
           this.colleges.push(item)
         }
       }).catch((err)=>{
-        console.log(err)
+        //console.log(err)
       })
     }).catch((err)=>{
-      console.log(err)
+     // console.log(err)
     })
    }
 }

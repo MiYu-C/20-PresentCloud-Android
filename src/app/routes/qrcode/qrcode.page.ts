@@ -84,10 +84,10 @@ export class QrcodePage implements OnInit {
           this.schools.push(item)
         }
       }).catch((err)=>{
-        console.log(err)
+        //console.log(err)
       })
     }).catch((err)=>{
-      console.log(err)
+      //console.log(err)
     })
 
     var qr = new QRious({
@@ -101,7 +101,7 @@ export class QrcodePage implements OnInit {
     const api = '/mobileApp/course/update'
     let json = this.classInfo
     json['college'] = {id: this.college}
-    console.log(json)
+   // console.log(json)
     const toast = await this.toastCtrl.create({
       message: '信息修改成功',
       duration: 3000,
@@ -164,7 +164,7 @@ export class QrcodePage implements OnInit {
         this.colleges.push(item)
       }
     }).catch((err)=>{
-      console.log(err)
+      //console.log(err)
     })
   }
 }

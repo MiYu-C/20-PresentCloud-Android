@@ -49,10 +49,10 @@ export class InfoPage implements OnInit {
           this.schools.push(item)
         }
       }).catch((err)=>{
-        console.log(err)
+        //console.log(err)
       })
     }).catch((err)=>{
-      console.log(err)
+      //console.log(err)
     })
   }
   checkSchool(){
@@ -72,7 +72,7 @@ export class InfoPage implements OnInit {
         this.colleges.push(item)
       }
     }).catch((err)=>{
-      console.log(err)
+      //console.log(err)
     })
   }
   async save() {
@@ -93,7 +93,7 @@ export class InfoPage implements OnInit {
           this.localStorageService.set(USER_KEY, this.userInfo)
           window.location.replace('tabs/tab3')
       }).catch((err)=>{
-        console.log(err)
+        //console.log(err)
       })
     }
     else {

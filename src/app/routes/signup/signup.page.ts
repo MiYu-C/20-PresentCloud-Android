@@ -93,7 +93,7 @@ export class SignupPage implements OnInit {
         this.schools.push(item)
       }
     }).catch((err)=>{
-      console.log(err)
+      //console.log(err)
     })
   }
   onNext() {
@@ -113,7 +113,7 @@ export class SignupPage implements OnInit {
       this.passportService.checkIsRegisted(this.user.phone).then(async (res:any) =>{
         this.onNext()
       }).catch(async (err:any) =>{
-        console.log(err)
+        //console.log(err)
         const toast = await this.toastCtrl.create({
           message: '该手机号码已注册',
           duration: 3000,
@@ -156,7 +156,7 @@ export class SignupPage implements OnInit {
   }
   async getCode() {
     let newcode = this.authenticationCode.createCode(4)
-    console.log(newcode)
+    //console.log(newcode)
     const alert = await this.alertCtrl.create({
       header: '验证码',
       message: newcode,
@@ -259,15 +259,22 @@ export class SignupPage implements OnInit {
         this.colleges.push(item)
       }
     }).catch((err)=>{
-      console.log(err)
+      //console.log(err)
     })
   }
   async onRegisterInfo(form: NgForm){
-    if(form.valid&&this.isStudent==true){
+    if(this.user.status==''){
+      const toast = await this.toastCtrl.create({
+        message: '请选择身份',
+        duration: 3000
+      })
+      toast.present()
+    }
+    else if(form.valid&&this.isStudent==true){
       this.user.college.id = Number(this.college)
       this.user.school.id = Number(this.school)
       this.user.dept.id = Number(this.college)
-      console.log(this.user)
+     //console.log(this.user)
       this.passportService.register(this.isStudent, this.studentForm).then(async (res:any)=>{
         const alert = await this.alertCtrl.create({
           header: '提示',
@@ -277,8 +284,14 @@ export class SignupPage implements OnInit {
         alert.present()
         window.location.replace('login')
         // this.router.navigateByUrl('passport/login')
-      }).catch(err =>{
-        console.log(err)
+      }).catch(async err =>{
+       // console.log(err)
+        const toast = await this.toastCtrl.create({
+          message: err.error.message,
+          duration: 3000
+        })
+        toast.present()
+        this.user.status=''
       })
     }else if(form.valid&&this.isStudent==false){
       this.user.college.id = Number(this.college)
@@ -292,8 +305,14 @@ export class SignupPage implements OnInit {
         alert.present()
         window.location.replace('login')
         // this.router.navigateByUrl('passport/login')
-      }).catch(err =>{
-        console.log(err)
+      }).catch(async err =>{
+        //console.log(err)
+        const toast = await this.toastCtrl.create({
+          message: err.error.message,
+          duration: 3000
+        })
+        toast.present()
+        this.user.status=''
       })
     }
     else{

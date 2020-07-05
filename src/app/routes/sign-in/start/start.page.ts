@@ -44,16 +44,16 @@ export class StartPage implements OnInit {
       alert('您的位置：' + resp.point.lng + ',' + resp.point.lat);
       longitude = resp.point.lng;
       latitude = resp.point.lat;
-      console.log(longitude);
+      //console.log(longitude);
       // this.LocalStorageService.set('longitude', resp.point.lng);
       // this.LocalStorageService.set('latitude', resp.point.lat);
       // this.NavController.navigateForward('\start');
       return longitude;
     }, { enableHighAccuracy: true });
-    console.log(longitude);
+   // console.log(longitude);
     this.localStorageService.set('longitude', longitude);
     this.localStorageService.set('latitude', latitude);
-    console.log(latitude);
+    //console.log(latitude);
 
     this.isStart = true
     const api='/mobileApp/release/sign'
@@ -62,9 +62,9 @@ export class StartPage implements OnInit {
       'code':'123456'
     }
     this.httpService.ajaxPost(api,json).then(async (res:any)=>{
-      console.log('开始签到')
+      //console.log('开始签到')
     }).catch(err=>{
-      console.log(err)
+     // console.log(err)
       return
     })
     const toast = await this.toastCtrl.create({

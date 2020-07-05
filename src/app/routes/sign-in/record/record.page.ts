@@ -25,7 +25,7 @@ export class RecordPage implements OnInit {
       this.historyList.sort(function(a:any, b:any){
         return b.createTime - a.createTime
       })
-      console.log(this.historyList)
+      //console.log(this.historyList)
       this.convert2DateTime()
     })
   }
