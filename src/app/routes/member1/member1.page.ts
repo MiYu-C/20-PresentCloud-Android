@@ -109,4 +109,7 @@ export class Member1Page implements OnInit{
   padding(number:Number){
     return number < 10 ? ('0' + number) : number
   }
+  clickedStar() {
+    this.router.navigateByUrl('/record2');
+  }
 }

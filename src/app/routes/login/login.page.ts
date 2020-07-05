@@ -28,7 +28,7 @@ export class LoginPage implements OnInit {
     // 验证输入是否合法
     if (this.login.userName === '') {
       const toast = await this.toastCtrl.create({
-        message: '请输入手机号码',
+        message: '请输入手机号',
         duration: 3000
       })
       toast.present()
@@ -73,7 +73,7 @@ export class LoginPage implements OnInit {
           toast.present()
         }else if (err.status == 404){
           const toast = await this.toastCtrl.create({
-            message: '该帐号不存在',
+            message: '帐号不存在',
             duration: 3000,
             buttons: [
               {

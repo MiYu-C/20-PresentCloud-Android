@@ -36,17 +36,6 @@ export class DetailPage implements OnInit {
     'joinPermission': true,
     'enabled': false,
   }
-  userInfo = {
-    'id': '',
-    'name': '',
-    'phone': '',
-    'sex': '',
-    'status': '',
-    'school': '',
-    'college': { "id": 8 },
-    'number': ''
-  }
-  
 
   constructor(private alertCtrl: AlertController, private router: Router, private httpService:CommonService, private toastCtrl: ToastController, private localStorageService: LocalStorageService) { }
 
@@ -82,12 +71,9 @@ export class DetailPage implements OnInit {
             if(this.college==res[this.number].children[i].id){
               this.collegeName=res[this.number].children[i].label
             } 
-  
           }
         })
-
       })
-
     })
     this.semesters = this.createSemesters()
 
@@ -106,31 +92,17 @@ export class DetailPage implements OnInit {
     toast.present()
   }
   
-  async closeClass(){
-    const alert = await this.alertCtrl.create({
-      header: '警告',
-      message: '是否结束当前班课',
-      buttons: [
-        {
-          text: '取消',
-          role: 'cancel'
-        },
-        {
-          text: '确定',
-          handler: () => {
-            const api = '/mobileApp/course/update'
-            const json = {
-              'id': this.classInfo.id,
-              'enabled': false
-            }
-            this.httpService.ajaxPut(api,json).then(async (res:any)=>{
-              this.classInfo.enabled = false
-            })
-          }
-        }
-      ]
+  checkSchool(){
+    this.colleges=[]
+    const api='/mobileApp/college'
+    this.httpService.ajaxGet(api).then((res:any)=>{
+
+    }).catch((err)=>{
+      console.log(err)
     })
-    alert.present()
+  }
+  gotoQrcode(){
+    this.router.navigateByUrl('/qrcode')
   }
 
   createSemesters(){
@@ -145,16 +117,4 @@ export class DetailPage implements OnInit {
     return semesters
   }
 
-  checkSchool(){
-    this.colleges=[]
-    const api='/mobileApp/college'
-    this.httpService.ajaxGet(api).then((res:any)=>{
-
-    }).catch((err)=>{
-      console.log(err)
-    })
-  }
-  gotoQrcode(){
-    this.router.navigateByUrl('/qrcode')
-  }
 }

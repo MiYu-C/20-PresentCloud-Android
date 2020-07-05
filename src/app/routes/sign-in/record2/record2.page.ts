@@ -5,13 +5,13 @@ import { LocalStorageService, GLOBAL_VARIABLE_KEY, USER_KEY } from 'src/app/serv
 import { CommonService } from 'src/app/services/common.service';
 import { async } from '@angular/core/testing';
 import { Router } from '@angular/router';
-declare var BMap;
+
 @Component({
-  selector: 'app-signin',
-  templateUrl: './signin.page.html',
-  styleUrls: ['./signin.page.scss'],
+  selector: 'app-record2',
+  templateUrl: './record2.page.html',
+  styleUrls: ['./record2.page.scss'],
 })
-export class SigninPage implements OnInit {
+export class Record2Page implements OnInit {
 
   classId=''
   courseCode=''
@@ -31,54 +31,6 @@ export class SigninPage implements OnInit {
         this.convert2DateTime()
       })
     })
-  }
-
-  async signin(){
-    let longitude: any ;
-    let latitude: any;
-    const geolocation = new BMap.Geolocation();
-    await geolocation.getCurrentPosition(function(resp) {
-      const mk = new BMap.Marker(resp.point);
-      alert('您的位置：' + resp.point.lng + ',' + resp.point.lat);
-      longitude = resp.point.lng;
-      latitude = resp.point.lat;
-      console.log(longitude);
-      // this.LocalStorageService.set('longitude', resp.point.lng);
-      // this.LocalStorageService.set('latitude', resp.point.lat);
-      // this.NavController.navigateForward('\start');
-      return longitude;
-    }, { enableHighAccuracy: true });
-    console.log(longitude);
-    this.localStorageService.set('longitude', longitude);
-    this.localStorageService.set('latitude', latitude);
-    console.log(latitude);
-
-
-    let api='/mobileApp/sign/student?courseId=' + this.classId + '&code=' + this.password + '&studentId=' + this.localStorageService.get(USER_KEY, {'id': null}).id
-    this.httpService.ajaxGet(api).then(async (res:any)=>{
-      const alert = await this.alertCtrl.create({
-        header: '提示',
-        message: '签到成功',
-        buttons: [
-          {
-            text: '确定',
-            handler: () => {
-              this.router.navigateByUrl('/class-tabs1/member1')
-            }
-          }
-        ]
-      })
-      alert.present()
-    }).catch(async (err:any)=>{
-      console.log(err)
-      const toast = await this.toastCtrl.create({
-        message: err.msg,
-        duration: 3000
-      })
-      toast.present()
-    })
-
-    
   }
 
   async convert2DateTime(){

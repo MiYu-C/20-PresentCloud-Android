@@ -75,17 +75,7 @@ export class StartPage implements OnInit {
   }
 
   async finish(){
-    const alert = await this.alertCtrl.create({
-      header: '警告',
-      message: '是否结束签到',
-      buttons: [
-        {
-          text: '取消',
-          role: 'cancel'
-        },
-        {
-          text: '确定',
-          handler: () => {
+
             const api = '/mobileApp/sign/close?courseId='+this.classId
             this.httpService.ajaxGet(api).then(async (res:any)=>{
               this.attendances = res.attendances
@@ -106,11 +96,7 @@ export class StartPage implements OnInit {
               })
               toast.present()
             })
-          }
-        }
-      ]
-    })
-    alert.present()
+
   }
 
   async back(){

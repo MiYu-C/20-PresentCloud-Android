@@ -14,16 +14,4 @@
     <div style="text-align: center;">
       <ion-button style="width: 80%;" (click)="signin()">开始签到</ion-button>
     </div>
-    <ion-list>
-      <ion-list-header>
-        <ion-label>历史签到记录</ion-label>
-      </ion-list-header>
-      <ion-item *ngFor="let item of historyList">
-        <ion-label>
-          <h2>{{item.day}}</h2>
-          <p>{{item.time}}</p>
-        </ion-label>
-        <ion-text slot="end">{{item.attendance?'已签到':'未签到'}}</ion-text>
-      </ion-item>
-    </ion-list>
   </ion-content>

@@ -61,7 +61,7 @@ export class MemberPage implements OnInit{
   async signIn(){
     if(this.classInfo.isClosed){
       const toast = await this.toastCtrl.create({
-        message: '本班课已结束',
+        message: '课程已结束',
         duration: 3000
       })
       toast.present()

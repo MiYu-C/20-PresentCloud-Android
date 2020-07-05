@@ -73,6 +73,10 @@ const routes: Routes = [
     path: 'qrcode',
     loadChildren: () => import('./routes/qrcode/qrcode.module').then( m => m.QrcodePageModule)
   },
+  {
+    path: 'record2',
+    loadChildren: () => import('./routes/sign-in/record2/record2.module').then( m => m.Record2PageModule)
+  },
 ];
 @NgModule({
   imports: [

@@ -26,29 +26,9 @@ export class ForgotPasswordPage implements OnInit {
     })
     alert.present()
   }
-    isOldPassword = true;
-    oldpassword: string;
-    newPassword: string;
-    checkPassword: string;
     constructor(private userService: UserService,
                 private toastController: ToastController,
                 private navCtrl: NavController, private router: Router,
                 private alertCtrl: AlertController) { }
-    async onSave() {console.log('onSave');
-      const oldPass = this.userService.getPassword();
-      this.isOldPassword = oldPass == this.oldpassword ? true : false;
-      if (this.newPassword == this.checkPassword && this.isOldPassword) {
-        this.userService.updatePassword(this.newPassword);
-        console.log('修改成功');
-        this.router.navigateByUrl('/setting');
-        const toast = await this.toastController.create({
-          message: '修改成功',
-          duration: 2000
-        });
-        await toast.present();
-      }
-    }
-  
 
-  
   }
